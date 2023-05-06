@@ -10,12 +10,16 @@
             <button type="button" class="btn rounded-button" style="width: 300px; height: 200px; border-color: #3B3468">Poner foto de portada</button>
         </div>
         <div class="col">
-            <input asp-for="NewExam.Name" class="form-control exam-field" placeholder="Nombre del examen">
-            <input asp-for="NewExam.Description" class="form-control exam-field" placeholder="Descripción">
+            <form method="post" asp-page-handler="SaveExam" id="exam-form">
+            <input asp-for="ExamTitle" class="form-control exam-field" id="exam-title" placeholder="Nombre del examen">
+            <input asp-for="ExamDescription" class="form-control exam-field" id="exam-description" placeholder="Descripción">
+            </form>
             <input class="form-control" placeholder="Temario">
         </div>
         <div class="col">
-            <form method="post" asp-page-handler="SetSelectedSubject">
+            <form method="post" asp-page-handler="SetSelectedSubject" id="subject-form">
+                <input type="hidden" name="ExamTitle" id="hidden-exam-title" value="@Model.ExamTitle"/>
+                <input type="hidden" name="ExamDescription" id="hidden-exam-description" value="@Model.ExamDescription"/>
                 <button class="btn btn-secondary btn-lg dropdown-toggle" id="subject-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     @if (Model.SelectedSubject != null)
                     {
@@ -30,7 +34,7 @@
                     @foreach (var subject in Model.Subjects)
                     {
                         <li>
-                            <button class="dropdown-item" type="submit" name="subjectId" value="@subject.ID">@subject.Name</button>
+                            <button class="dropdown-item" onclick="onSelectDropdown()" name="subjectId" value="@subject.ID">@subject.Name</button>
                         </li>
                     }
                 </ul>
@@ -49,42 +53,55 @@
             <button onclick="addQuestion()">Añadir Pregunta</button>
         </div>
         <div class="col">
-            
-            <div class="col">
-                <input type="text" class="custom-text-field" placeholder="Escribe la pregunta">
-            </div>
-            <div class="container my-4">
-                <div class="row">
-                    <div class="col-sm-6 col-md-6 col-lg-6 mb-3 d-flex justify-content-center">
-                        <input class="btn rounded-button" style="border-bottom-width: 2px; width: 100%; height: 100px; border-radius: 24px; border-color: blue" placeholder="Opción A">
+            <form method="post" asp-page-handler="AddQuestion">
+                <div class="col">
+                    <input asp-for="CurrentQuestion.Title" type="text" class="custom-text-field" placeholder="Escribe la pregunta">
+                </div>
+                <div class="container my-4">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6 col-lg-6 mb-3 d-flex justify-content-center">
+                            <input asp-for="CurrentQuestion.Option1" class="btn rounded-button" style="border-bottom-width: 2px; width: 100%; height: 100px; border-radius: 24px; border-color: blue" placeholder="Opción A">
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-6 mb-3 d-flex justify-content-center">
+                            <input asp-for="CurrentQuestion.Option2" class="btn rounded-button" style="border-bottom-width: 2px; width: 100%; height: 100px; border-radius: 24px; border-color: green" placeholder="Opción B">
+                        </div>
                     </div>
-                    <div class="col-sm-6 col-md-6 col-lg-6 mb-3 d-flex justify-content-center">
-                        <input class="btn rounded-button" style="border-bottom-width: 2px; width: 100%; height: 100px; border-radius: 24px; border-color: green" placeholder="Opción B">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6 col-lg-6 mb-3 d-flex justify-content-center">
+                            <input asp-for="CurrentQuestion.Option3" class="btn rounded-button" style="border-bottom-width: 2px; width: 100%; height: 100px; border-radius: 24px; border-color: orange" placeholder="Opción C">
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-6 mb-3 d-flex justify-content-center">
+                            <input asp-for="CurrentQuestion.Option4" class="btn rounded-button" style="border-bottom-width: 2px; width: 100%; height: 100px; border-radius: 24px; border-color: red" placeholder="Opción D">
+                        </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-6 col-md-6 col-lg-6 mb-3 d-flex justify-content-center">
-                        <input class="btn rounded-button" style="border-bottom-width: 2px; width: 100%; height: 100px; border-radius: 24px; border-color: orange"  placeholder="Opción C">
-                    </div>
-                    <div class="col-sm-6 col-md-6 col-lg-6 mb-3 d-flex justify-content-center">
-                        <input class="btn rounded-button" style="border-bottom-width: 2px; width: 100%; height: 100px; border-radius: 24px; border-color: red" placeholder="Opción D">
+                    <div class="col">
+                        <select asp-for="CurrentQuestion.Answer" class="dropdown-toggle btn-lg">
+                            <option value="">Respuesta correcta</option>
+                            <ul class="dropdown-menu">
+                                @for (int i = 1; i < 5; i++)
+                                {
+                                    <option class="dropdown-item" value="@i">@i</option>
+                                }
+                            </ul>
+                        </select>
+                        <input type="hidden" name="ExamTitle" value="@Model.ExamTitle"/>
+                        <input type="hidden" name="ExamDescription" value="@Model.ExamDescription"/>
+                        <button class="btn rounded-button" type="submit" style="border-bottom-width: 2px; width: 30%; height: 50px; border-radius: 24px; border-color: blue">Guardar Pregunta</button>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <form>
-                    <button class="btn btn-secondary btn-lg dropdown-toggle" id="second-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Respuesta correcta
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Opción A</a></li>
-                        <li><a class="dropdown-item" href="#">Opción B</a></li>
-                        <li><a class="dropdown-item" href="#">Opción C</a></li>
-                        <li><a class="dropdown-item" href="#">Opción D</a></li>
-                    </ul>
-                    <input class="btn rounded-button" style="border-bottom-width: 2px; width: 30%; height: 50px; border-radius: 24px; border-color: blue"  placeholder="Guardar Pregunta">
-                </form>
-            </div>
+            </form>
         </div>
     </div>
+    
+
+    
+    <div class="row align-items-center text-center">
+        <div class="col">
+            <button onclick="submitExam()" class="btn rounded-button" type="submit" style="border-bottom-width: 2px; width: 30%; height: 50px; border-radius: 24px; border-color: green">Guardar Examen</button>
+        </div>
+    </div>
+    
+    
 </div>

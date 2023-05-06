@@ -1,4 +1,6 @@
 ﻿using System.Diagnostics;
+using System.Text;
+using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using AtosLearning.Models;
@@ -11,93 +13,89 @@ public class IndexModel : PageModel
     public IList<Subject> Subjects { get; set; }
     public Teacher CurrentTeacher;
     [BindProperty]
-    public Exam NewExam { get; set; }
+    public string ExamTitle { get; set; }
+    [BindProperty]
+    public string ExamDescription { get; set; }
 
     public IList<Question> Questions;
     
+    [BindProperty]
+    public Question CurrentQuestion { get; set; }
+
+
+
     public Subject? SelectedSubject { get; set; }
 
     public void OnGet()
     {
         CurrentTeacher = new Teacher(id: 1, name: "Santiago Quihui", image: "https://i.imgur.com/3ZtJZ1i.jpg");
-        Debug.WriteLine(ViewData["Testing"]);
-        GetSubjects();
-        NewExam = new Exam();
-        Questions = new List<Question>();
-    }
-    
-    public void AddQuestion(string title, string option1, string option2, string option3, string option4, int answer)
-    {
-        Question question = new Question();
-        question.Title = title;
-        question.Option1 = option1;
-        question.Option2 = option2;
-        question.Option3 = option3;
-        question.Option4 = option4;
-        question.Answer = answer;
-        Questions.Add(question);
-    }
 
-    public void UploadExam()
-    {
-        string connectionString = "Server=127.0.0.1;Port=3306;Database=reto;Uid=root;password=Santi66051*;";
-        MySqlConnection connection = new MySqlConnection(connectionString);
-        connection.Open();
-        
-        MySqlCommand cmd = new MySqlCommand();
-        cmd.Connection = connection;
-        cmd.CommandText = $"INSERT INTO Exams (exam_title, subject_id, exam_description) VALUES ('{NewExam.Name}', {NewExam.SubjectID}, '{NewExam.Description}')";
-        cmd.ExecuteNonQuery();
-        connection.Dispose();
-        UploadQuestions();
-    }
+        // Get the list of subjects from session state
+        var subjectBytes = HttpContext.Session.Get("Subjects"); 
+        var subjects = subjectBytes == null ? null : JsonSerializer.Deserialize<List<Subject>>(subjectBytes);
 
-    private void UploadQuestions()
-    {
-        string connectionString = "Server=127.0.0.1;Port=3306;Database=reto;Uid=root;password=Santi66051*;";
-        MySqlConnection connection = new MySqlConnection(connectionString);
-        connection.Open();
-        
-        MySqlCommand cmd = new MySqlCommand();
-        cmd.Connection = connection;
-        
-        foreach (var question in Questions)
+        // If the list is null (i.e. this is the first time the page has been loaded),
+        // create a new list and add it to session state
+        if (subjects == null)
         {
-            cmd.CommandText = $"INSERT INTO Questions (question_title, exam_id, option_1, option_2, option_3, option_4, answer) VALUES ('{question.Title}', {NewExam.ID}, '{question.Option1}', '{question.Option2}', '{question.Option3}', '{question.Option4}', {question.Answer})";
-            cmd.ExecuteNonQuery();
+            subjects = GetSubjects();
+            var bytes = JsonSerializer.SerializeToUtf8Bytes(subjects);
+            HttpContext.Session.Set("Subjects", bytes);
         }
-        connection.Dispose();
+
+        // Set the list of subjects as a property on the model so it can be used in the view
+        Subjects = subjects;
     }
     
+    public void OnPost()
+    {
+        // TODO: Save exam
+        Debug.WriteLine($"{CurrentQuestion.Answer}");
+    }
+
+
     public void OnPostAddQuestion()
     {
-        AddQuestion(Request.Form["title"], Request.Form["option1"], Request.Form["option2"], Request.Form["option3"], Request.Form["option4"], Convert.ToInt32(Request.Form["answer"]));
+        Debug.WriteLine(ExamTitle);
+        // Get the list of subjects from session state
+        var questionsBytes = HttpContext.Session.Get("Questions"); 
+        var questions = questionsBytes == null ? null : JsonSerializer.Deserialize<List<Question>>(questionsBytes);
+
+        // If the list is null (i.e. this is the first question being added),
+        // create a new list and add it to session state
+        if (questions == null)
+        {
+            questions = new List<Question>();
+            questions.Add(CurrentQuestion);
+            var bytes = JsonSerializer.SerializeToUtf8Bytes(questions);
+            HttpContext.Session.Set("Questions", bytes);
+        }
+
+        // Set the list of questions as a property on the model so it can be used in the view
+        Questions = questions;
+        
+        LoadState();
     }
-    
+
+
+    public void OnPostSaveExam()
+    {
+        LoadState();
+        UploadExam();
+    }
     
     public void OnPostSetSelectedSubject(int subjectId)
     {
-        // GetTeacher();
-        // GetSubjects();
+        LoadState();
         SelectedSubject = Subjects.FirstOrDefault(s => s.ID == subjectId);
+        var bytes = JsonSerializer.SerializeToUtf8Bytes(SelectedSubject);
+        HttpContext.Session.Set("SelectedSubject", bytes);
     }
     
 
-    public void OnPost()
+    public List<Subject> GetSubjects()
     {
-        
-    }
-
-
-    public void GetTeacher()
-    {
-        CurrentTeacher = new Teacher(id: 1, name: "Santiago Quihui", image: "https://i.imgur.com/3ZtJZ1i.jpg");
-    }
-
-
-    public void GetSubjects()
-    {
-        Subjects = new List<Subject>();
+        var newSubjects = new List<Subject>();
         string connectionString = "Server=127.0.0.1;Port=3306;Database=reto;Uid=root;password=Santi66051*;";
         MySqlConnection connection = new MySqlConnection(connectionString);
         connection.Open();
@@ -111,10 +109,90 @@ public class IndexModel : PageModel
             while (reader.Read())
             {
                 Subject subject = new Subject(id: Convert.ToInt32(reader["subject_id"]), name: reader["subject_name"].ToString(), teacherID: Convert.ToInt32(reader["teacher_id"]), courseID: Convert.ToInt32(reader["course_id"]));
-                Subjects.Add(subject);
+                newSubjects.Add(subject);
             }
         }
         
         connection.Dispose();
+        return newSubjects;
     }
+
+
+    private void LoadState()
+    {
+        // Subjects
+        // Get the list of subjects from session state
+        var subjectBytes = HttpContext.Session.Get("Subjects"); 
+        var subjects = subjectBytes == null ? null : JsonSerializer.Deserialize<List<Subject>>(subjectBytes);
+        // Set the list of subjects as a property on the model so it can be used in the view
+        Subjects = subjects;
+        
+        // Questions
+        // Get the list of questions from session state
+        var questionsBytes = HttpContext.Session.Get("Questions");
+        var questions = questionsBytes == null ? null : JsonSerializer.Deserialize<List<Question>>(questionsBytes);
+        Questions = questions;
+        
+        
+        // Selected subject
+        // Get the selected subject from session state
+        var selectedSubjectBytes = HttpContext.Session.Get("SelectedSubject");
+        var selectedSubject = selectedSubjectBytes == null ? null : JsonSerializer.Deserialize<Subject>(selectedSubjectBytes);
+        SelectedSubject = selectedSubject;
+
+
+
+        Debug.WriteLine("This is the exam title:");
+        Debug.WriteLine(ExamTitle);
+        // get exam title and description
+        ExamTitle = Request.Form["ExamTitle"];
+        ExamDescription = Request.Form["ExamDescription"];
+        Debug.WriteLine(ExamTitle);
+    }
+
+    // Upload to database methods
+    
+    
+    public void UploadExam()
+    {
+        string connectionString = "Server=127.0.0.1;Port=3306;Database=reto;Uid=root;password=Santi66051*;";
+        MySqlConnection connection = new MySqlConnection(connectionString);
+        connection.Open();
+        
+        MySqlCommand cmd = new MySqlCommand();
+        cmd.Connection = connection;
+        cmd.CommandText = $"INSERT INTO Exams (exam_title, subject_id, exam_description) VALUES ('{ExamTitle}', {SelectedSubject.ID}, '{ExamDescription}')";
+        cmd.ExecuteNonQuery();
+        cmd.CommandText = $"SELECT * FROM Exams WHERE exam_title = '{ExamTitle}' AND subject_id = {SelectedSubject.ID} AND exam_description = '{ExamDescription}'";
+        int examId = 0;
+        using (var reader = cmd.ExecuteReader())
+        {
+            while (reader.Read())
+            {
+                examId = Convert.ToInt32(reader["exam_id"]);
+            }
+        }
+        
+        connection.Dispose();
+        UploadQuestions(examId);
+    }
+    
+    private void UploadQuestions(int examId)
+    {
+        string connectionString = "Server=127.0.0.1;Port=3306;Database=reto;Uid=root;password=Santi66051*;";
+        MySqlConnection connection = new MySqlConnection(connectionString);
+        connection.Open();
+        
+        
+        MySqlCommand cmd = new MySqlCommand();
+        cmd.Connection = connection;
+        
+        foreach (var question in Questions)
+        {
+            cmd.CommandText = $"INSERT INTO Questions (question_title, exam_id, option_1, option_2, option_3, option_4, answer) VALUES ('{question.Title}', {examId}, '{question.Option1}', '{question.Option2}', '{question.Option3}', '{question.Option4}', {question.Answer})";
+            cmd.ExecuteNonQuery();
+        }
+        connection.Dispose();
+    }
+    
 }

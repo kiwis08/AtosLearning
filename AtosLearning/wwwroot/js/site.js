@@ -2,8 +2,13 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
-function onSelectDropdown(subject) {
-    document.getElementById("subject-dropdown").textContent = subject;
+function onSelectDropdown() {
+    const examTitle = document.getElementById("exam-title");
+    const examDescription = document.getElementById("exam-description");
+    alert(examTitle.value)
+    document.getElementById("hidden-exam-title").value = examTitle.value;
+    document.getElementById("hidden-exam-description").value = examDescription.value;
+    document.getElementById("subject-form").submit();
 }
 
 function addQuestion() {
@@ -21,4 +26,8 @@ function addQuestion() {
 
 
     questionsList.appendChild(newQuestionLi);
+}
+
+function submitExam() {
+    document.getElementById('exam-form').submit();
 }
