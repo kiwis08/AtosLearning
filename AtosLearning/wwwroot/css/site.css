@@ -120,3 +120,75 @@ header {
 .yellow {
   color: #FFC715;
 }
+
+body{
+  margin:0px;
+  padding: 0px;
+  background-color: #0173AF;
+}
+.right-aligned {
+  margin-left: 640px;
+  position: absolute;
+  margin-top: 140px;
+
+}
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+h1 {
+  color: white;
+  font-size: 59px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: bold;
+}
+h2{
+  color: #FFC715;
+  font-size: 95px;
+  margin-left: 28px;
+  margin-top: 40px;
+}
+p {
+  color: white;
+  font-size: 23px;
+  margin-top: 30px;
+  margin-left: 75px;
+  font-family: 'Raleway', sans-serif;
+
+}
+.submit-btn {
+  background-color: black;
+  color: white;
+  height: 30px;
+  width: 250px;
+  border-radius: 10px;
+  padding: 3px 20px;
+
+  margin-left: 130px;
+  font-family: 'Raleway', sans-serif;
+}
+.olvidarcontraseña {
+  color: white;
+  font-size: 15px;
+  position: absolute;
+  bottom: 2px;
+  margin-right: 15px;
+  left: 11%;
+  margin-top: 6px;
+}
+intro {
+  margin-left:7px;
+}
+.tengocuenta {
+  position: absolute;
+  top: 68px;
+  right: 117px;
+  background-color: #D9D9D9;
+  border: none;
+  color: #3B3486;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 10px;
+  width: 267px;
+  font-family: 'Raleway', sans-serif;
+}

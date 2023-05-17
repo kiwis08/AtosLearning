@@ -1,0 +1,131 @@
+﻿@page
+@model AtosLearning.Pages.SesionModel
+@{
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/bootstrap.css" />
+    <style>
+        /* Styles for the pop-up */
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+        }
+
+        .popup-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            color: black;
+            text-align: center;
+        }
+
+        .popup-close {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+
+        .redirigir {
+            color: black;
+            margin-right: 80px;
+            font-size: 30px;
+        }
+    </style>
+    <script src="sesion.js"></script>
+    <script>function showPopup(event) {
+            event.preventDefault(); // Prevent form submission and page refresh
+
+            var emailInput = document.getElementById('correo');
+            var passwordInput = document.getElementById('contraseña');
+            var emailValue = emailInput.value;
+            var passwordValue = passwordInput.value;
+
+            if (emailValue === 'example@example.com' && passwordValue === 'password123') {
+                // Submit form
+                var form = document.getElementById('loginForm');
+                form.submit();
+            } else {
+                // Show error pop-up
+                var errorPopup = document.getElementById('errorPopup');
+                errorPopup.style.display = 'block';
+            }
+        }
+
+        function closePopup(popupId) {
+            var popup = document.getElementById(popupId);
+            popup.style.display = 'none';
+        }</script>
+</head>
+
+<body>
+    <div class="logo-container">
+        <img src="images/ATOSLogo.png" width="180px" height="180px" />
+        <h1>AtosLearning</h1>
+    </div>
+
+    <p class="hola">¡Hola, bienvenido de nuevo!</p>
+
+    <div class="white-square">
+        <form id="loginForm" method="post">
+            <div class="correoycontraseña">
+                <div class="form-group">
+                    <label for="correo" class="label-left">Correo:</label>
+                    <input asp-for="Email" type="email" id="correo" class="form-control" placeholder="teclea tu correo, ej:example@example.com" />
+                </div>
+                <div class="form-group">
+                    <label for="contraseña" class="label-left">Contraseña:</label>
+                    <input asp-for="Password" type="password" id="contraseña" class="form-control" placeholder="teclea tu contraseña, ej:password123" />
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary custom" id="loginButton" onclick="showPopup(event)">Iniciar Sesión</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+
+    <!-- Pop-up -->
+    <div id="successPopup" class="popup-overlay">
+        <div class="popup-content">
+            <h3>¡Éxito!</h3>
+            <span class="popup-icon"><i class="fas fa-check"></i></span>
+            <p class="textopopup"> Se inició la sesión con éxito.</p>
+            <span class="popup-close" onclick="closePopup('successPopup')">Cerrar</span>
+        </div>
+    </div>
+
+    <!-- Error Pop-up -->
+    <div id="errorPopup" class="popup-overlay">
+        <div class="popup-content">
+            <h3> ¡Hubo un error!</h3>
+            <span class="popup-icon"><i class="fas fa-times"></i></span>
+            <p class="textopopup">Correo y/o contraseña inválida.</p>
+            <span class="popup-close" onclick="closePopup('errorPopup')">Cerrar</span>
+        </div>
+    </div>
+
+</body>
+</html>
