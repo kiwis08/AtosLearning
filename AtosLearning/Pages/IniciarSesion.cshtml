@@ -1,0 +1,41 @@
+﻿@page
+@model IniciarSesionModel
+@{
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway&display=swap">
+    <link href="css/iniciarsesion.css" rel="stylesheet" />
+</head>
+<body>
+
+
+    <div class="logo-container">
+        <img src="ATOSLogo.png" width="180px" height="180px" />
+        <h1>AtosLearning</h1>
+    </div>
+
+
+    <div class="rectangle">
+        <p class="crear-cuenta">Ingresar</p>
+        <form id="loginForm" method="post" asp-page="/IniciarSesion">
+            <input type="email" placeholder="Correo" name="Email" />
+            <input type="password" placeholder="Contraseña" name="Password" />
+
+            <div class="button-container">
+                <button type="button" class="green-button" onclick="submitForm()">Ingresar</button>
+
+                <button type="button" onclick="location.href='/CrearCuenta'">Crear una Cuenta</button>
+            </div>
+        </form>
+    </div>
+
+    <script>function submitForm() {
+            document.getElementById('loginForm').submit();
+        }</script>
+
+</body>
+</html>

@@ -63,9 +63,9 @@
             var passwordValue = passwordInput.value;
 
             if (emailValue === 'example@example.com' && passwordValue === 'password123') {
-                // Submit form
-                var form = document.getElementById('loginForm');
-                form.submit();
+                // Show success pop-up
+                var successPopup = document.getElementById('successPopup');
+                successPopup.style.display = 'block';
             } else {
                 // Show error pop-up
                 var errorPopup = document.getElementById('errorPopup');
@@ -81,22 +81,22 @@
 
 <body>
     <div class="logo-container">
-        <img src="images/ATOSLogo.png" width="180px" height="180px" />
+        <img src="ATOSLogo.png" width="180px" height="180px" />
         <h1>AtosLearning</h1>
     </div>
 
     <p class="hola">¡Hola, bienvenido de nuevo!</p>
 
     <div class="white-square">
-        <form id="loginForm" method="post">
+        <form>
             <div class="correoycontraseña">
                 <div class="form-group">
                     <label for="correo" class="label-left">Correo:</label>
-                    <input asp-for="Email" type="email" id="correo" class="form-control" placeholder="teclea tu correo, ej:example@example.com" />
+                    <input type="email" id="correo" class="form-control" placeholder="teclea tu correo, ej:example@example.com" />
                 </div>
                 <div class="form-group">
                     <label for="contraseña" class="label-left">Contraseña:</label>
-                    <input asp-for="Password" type="password" id="contraseña" class="form-control" placeholder="teclea tu contraseña, ej:password123" />
+                    <input type="password" id="contraseña" class="form-control" placeholder="teclea tu contraseña, ej:password123" />
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary custom" id="loginButton" onclick="showPopup(event)">Iniciar Sesión</button>
@@ -112,7 +112,7 @@
         <div class="popup-content">
             <h3>¡Éxito!</h3>
             <span class="popup-icon"><i class="fas fa-check"></i></span>
-            <p class="textopopup"> Se inició la sesión con éxito.</p>
+            <p class="textopopup"> Se inició la sesión con éxito..</p>
             <span class="popup-close" onclick="closePopup('successPopup')">Cerrar</span>
         </div>
     </div>

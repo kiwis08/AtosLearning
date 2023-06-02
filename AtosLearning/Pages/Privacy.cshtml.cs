@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace AtosLearning.Pages;
 
@@ -16,3 +15,4 @@ public class PrivacyModel : PageModel
     {
     }
 }
+

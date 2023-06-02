@@ -21,7 +21,7 @@ function addQuestion() {
     newQuestionLi.classList.add('btn');
     newQuestionLi.classList.add('list-group-item');
     newQuestionLi.classList.add('border-bottom');
-    
+
     newQuestionLi.style.backgroundColor = 'transparent';
 
 

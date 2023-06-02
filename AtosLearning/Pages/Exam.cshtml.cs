@@ -13,7 +13,7 @@ public class ExamModel : PageModel
     
     private readonly IConfiguration _configuration;
     
-    public IList<Subject> Subjects { get; set; }
+    public IList<Subject> Subjects { get; set; } = new List<Subject>();
     public Teacher CurrentTeacher;
     [BindProperty]
     public string ExamTitle { get; set; }
@@ -29,14 +29,17 @@ public class ExamModel : PageModel
 
     public Subject? SelectedSubject { get; set; }
     
+    [BindProperty]
+    public int CorrectAnswerIndex { get; set; }
+    
     public ExamModel(IConfiguration configuration)
     {
         _configuration = configuration;
     }
 
-    public void OnGet()
+    public async void OnGet()
     {
-        CurrentTeacher = new Teacher(id: 1, name: "Santiago Quihui", image: "https://i.imgur.com/3ZtJZ1i.jpg");
+        CurrentTeacher = new Teacher(id: 2, name: "Santiago Quihui", image: "https://i.imgur.com/3ZtJZ1i.jpg");
 
         // Get the list of subjects from session state
         var subjectBytes = HttpContext.Session.Get("Subjects"); 
@@ -46,7 +49,7 @@ public class ExamModel : PageModel
         // create a new list and add it to session state
         if (subjects == null)
         {
-            subjects = GetSubjects();
+            subjects = await GetSubjects();
             var bytes = JsonSerializer.SerializeToUtf8Bytes(subjects);
             HttpContext.Session.Set("Subjects", bytes);
         }
@@ -58,7 +61,7 @@ public class ExamModel : PageModel
     public void OnPost()
     {
         // TODO: Save exam
-        Debug.WriteLine($"{CurrentQuestion.Answer}");
+        Debug.WriteLine($"{CurrentQuestion.Answers[0].Title}");
     }
 
 
@@ -101,28 +104,16 @@ public class ExamModel : PageModel
     }
     
 
-    public List<Subject> GetSubjects()
+    public async Task<List<Subject>> GetSubjects()
     {
-        var newSubjects = new List<Subject>();
         string connectionString = _configuration.GetConnectionString("atoslearning");
-        MySqlConnection connection = new MySqlConnection(connectionString);
-        connection.Open();
+        var url = connectionString + "Subjects/teacher/1";
         
-        MySqlCommand cmd = new MySqlCommand();
-        cmd.Connection = connection;
-        cmd.CommandText = $"SELECT * FROM Subjects WHERE teacher_id = {CurrentTeacher.ID}";
-        
-        using (var reader = cmd.ExecuteReader())
-        {
-            while (reader.Read())
-            {
-                Subject subject = new Subject(id: Convert.ToInt32(reader["subject_id"]), name: reader["subject_name"].ToString(), teacherID: Convert.ToInt32(reader["teacher_id"]), courseID: Convert.ToInt32(reader["course_id"]));
-                newSubjects.Add(subject);
-            }
-        }
-        
-        connection.Dispose();
-        return newSubjects;
+        var client = new HttpClient();
+        var response = await client.GetAsync(url);
+        var json = await response.Content.ReadAsStringAsync();
+        var subjects = JsonSerializer.Deserialize<List<Subject>>(json);
+        return subjects ?? new List<Subject>();
     }
 
 
@@ -182,25 +173,7 @@ public class ExamModel : PageModel
         }
         
         connection.Dispose();
-        UploadQuestions(examId);
+        //UploadQuestions(examId);
     }
-    
-    private void UploadQuestions(int examId)
-    {
-        string connectionString = _configuration.GetConnectionString("atoslearning");
-        MySqlConnection connection = new MySqlConnection(connectionString);
-        connection.Open();
-        
-        
-        MySqlCommand cmd = new MySqlCommand();
-        cmd.Connection = connection;
-        
-        foreach (var question in Questions)
-        {
-            cmd.CommandText = $"INSERT INTO Questions (question_title, exam_id, option_1, option_2, option_3, option_4, answer) VALUES ('{question.Title}', {examId}, '{question.Option1}', '{question.Option2}', '{question.Option3}', '{question.Option4}', {question.Answer})";
-            cmd.ExecuteNonQuery();
-        }
-        connection.Dispose();
-    }
-    
+
 }

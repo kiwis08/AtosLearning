@@ -19,10 +19,10 @@ namespace AtosLearning.Pages
         {
             // Perform your login logic here
             // For example, check the email and password against a database
-            if (Email == "example@example.com" && Password == "password123")
+            if (Email == "example@example.com" && Password == "password")
             {
                 // Successful login
-                return RedirectToPage("Exam"); // Redirect to the dashboard page
+                return RedirectToPage("/Dashboard"); // Redirect to the dashboard page
             }
             else
             {

@@ -1,0 +1,36 @@
+﻿@page
+@model AtosLearning.Pages.HomepageModel
+@{
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway&display=swap">
+    <link href="css/homepage.css" rel="stylesheet" />
+    <link href="css/custom.css" rel="stylesheet" /> <!-- Include the custom CSS file -->
+</head>
+<body>
+    <div class="header">
+        <p class="hola">ATOS LEARNING</p>
+    </div>
+
+    <div class="line"></div>
+    <div class="content">
+        <div class="top-line"></div>
+
+        <button class="button-rectangle" onclick="location.href='/Exam'">Crear Exámen</button>
+        <input type="text" class="search-bar" placeholder="Buscar Exámen">
+        <button class="buscar" onclick="performSearch()">Buscar</button>
+    </div>
+
+    <script>function performSearch() {
+            var searchInput = document.querySelector(".search-bar").value;
+            // Perform search logic with the searchInput value
+            // Example: Display search results or perform an AJAX request
+            console.log("Performing search for: " + searchInput);
+        }</script>
+</body>
+</html>

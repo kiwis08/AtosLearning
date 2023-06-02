@@ -1,17 +1,12 @@
 ﻿@page
-@model ExamModel
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model AtosLearning.Pages.ExamModel
 @{
     ViewData["Title"] = "Home page";
 }
 
 <head>
-    <style>
-        body{
-          margin:0px;
-          padding: 0px;
-          background-color: #FFFFFF;
-        }
-    </style>
+    <link href="css/exam.css" rel="stylesheet" />
 </head>
 
 <header>
@@ -91,24 +86,24 @@
                 <div class="container my-4">
                     <div class="row">
                         <div class="col-sm-6 col-md-6 col-lg-6 mb-3 d-flex justify-content-center">
-                            <input asp-for="CurrentQuestion.Option1" class="btn rounded-button" style="border-bottom-width: 2px; width: 100%; height: 100px; border-radius: 24px; border-color: blue" placeholder="Opción A">
+                            <input asp-for="CurrentQuestion.Answers[0].Title" class="btn rounded-button" style="border-bottom-width: 2px; width: 100%; height: 100px; border-radius: 24px; border-color: blue" placeholder="Opción A">
                         </div>
                         <div class="col-sm-6 col-md-6 col-lg-6 mb-3 d-flex justify-content-center">
-                            <input asp-for="CurrentQuestion.Option2" class="btn rounded-button" style="border-bottom-width: 2px; width: 100%; height: 100px; border-radius: 24px; border-color: green" placeholder="Opción B">
+                            <input asp-for="CurrentQuestion.Answers[1].Title" class="btn rounded-button" style="border-bottom-width: 2px; width: 100%; height: 100px; border-radius: 24px; border-color: green" placeholder="Opción B">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-6 col-md-6 col-lg-6 mb-3 d-flex justify-content-center">
-                            <input asp-for="CurrentQuestion.Option3" class="btn rounded-button" style="border-bottom-width: 2px; width: 100%; height: 100px; border-radius: 24px; border-color: orange" placeholder="Opción C">
+                            <input asp-for="CurrentQuestion.Answers[2].Title" class="btn rounded-button" style="border-bottom-width: 2px; width: 100%; height: 100px; border-radius: 24px; border-color: orange" placeholder="Opción C">
                         </div>
                         <div class="col-sm-6 col-md-6 col-lg-6 mb-3 d-flex justify-content-center">
-                            <input asp-for="CurrentQuestion.Option4" class="btn rounded-button" style="border-bottom-width: 2px; width: 100%; height: 100px; border-radius: 24px; border-color: red" placeholder="Opción D">
+                            <input asp-for="CurrentQuestion.Answers[3].Title" class="btn rounded-button" style="border-bottom-width: 2px; width: 100%; height: 100px; border-radius: 24px; border-color: red" placeholder="Opción D">
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <select asp-for="CurrentQuestion.Answer" class="dropdown-toggle btn-lg">
+                        <select asp-for="CorrectAnswerIndex" class="dropdown-toggle btn-lg">
                             <option value="">Respuesta correcta</option>
                             <ul class="dropdown-menu">
                                 @for (int i = 1; i < 5; i++)
