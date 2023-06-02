@@ -1,17 +1,26 @@
+using System.Text.Json.Serialization;
+
 namespace AtosLearning.Models;
 
 public class Subject
 {
+    [JsonPropertyName("id")]
     public int ID { get; set; }
-    public string Name { get; set; }
-    public int teacherID { get; set; }
-    public int courseID { get; set; }
     
-    public Subject(int id, string name, int teacherID, int courseID)
+    [JsonPropertyName("name")]
+    public string Name { get; set; }
+    
+    [JsonPropertyName("teacherId")]
+    public int TeacherId { get; set; }
+    
+    [JsonPropertyName("courseId")]
+    public int CourseId { get; set; }
+    
+    public Subject(int id, string name, int teacherId, int courseId)
     {
         ID = id;
         Name = name;
-        this.teacherID = teacherID;
-        this.courseID = courseID;
+        TeacherId = teacherId;
+        CourseId = courseId;
     }
 }
