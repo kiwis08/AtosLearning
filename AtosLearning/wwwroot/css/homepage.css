@@ -25,9 +25,11 @@ header {
     padding: 0;
     display: flex;
     justify-content: space-between;
+    margin:0px 0px;
 }
 
 body {
+    margin: 0px 0px;
     background-color: white;
     padding: 0;
     display: flex;
