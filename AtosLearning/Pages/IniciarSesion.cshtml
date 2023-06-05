@@ -19,23 +19,32 @@
     </div>
 
 
-    <div class="rectangle">
-        <p class="crear-cuenta">Ingresar</p>
-        <form id="loginForm" method="post" asp-page="/IniciarSesion">
-            <input type="email" placeholder="Correo" name="Email" />
-            <input type="password" placeholder="Contraseña" name="Password" />
+<div class="rectangle">
+    <p class="crear-cuenta">Ingresar</p>
+    <form id="loginForm" method="post" asp-page="/IniciarSesion">
+        <input type="email" placeholder="Correo" name="Email" />
+        <input type="password" placeholder="Contraseña" name="Password" id="passwordField"/>
 
-            <div class="button-container">
-                <button type="button" class="green-button" onclick="submitForm()">Ingresar</button>
+        <div class="button-container">
+            <button id="signIn" type="button" class="green-button" onclick="submitForm()">Ingresar</button>
 
-                <button type="button" onclick="location.href='/CrearCuenta'">Crear una Cuenta</button>
-            </div>
-        </form>
-    </div>
+            <button type="button" onclick="location.href='/CrearCuenta'">Crear una Cuenta</button>
+        </div>
+    </form>
+</div>
 
-    <script>function submitForm() {
-            document.getElementById('loginForm').submit();
-        }</script>
+<script>
+function submitForm() {
+    document.getElementById('loginForm').submit();
+}
+var input = document.getElementById("passwordField");
+    input.addEventListener("keypress", function(event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        document.getElementById("signIn").click();
+      }
+    });
+</script>
 
 </body>
 </html>
