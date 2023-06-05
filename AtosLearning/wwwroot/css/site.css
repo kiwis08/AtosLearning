@@ -34,14 +34,19 @@ p {
     
 }
 .submit-button {
-  background-color: black;
-  color: white;
-  width: 250px;
-  border-radius: 10px;
-  padding: 3px 20px;
-  margin-left: 130px;
-  font-family: 'Raleway', sans-serif;
+    top: 68px;
+    background-color: black;
+    color: white;
+    width: 250px;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin-left: 130px;
+    font-family: 'Raleway', sans-serif;
 }
+.submit-button:hover {
+    background-color: #2b2b2b;
+}
+
 .olvidarcontraseña {
     color: white;
     font-size: 15px;
@@ -54,16 +59,20 @@ p {
 intro{
     margin-left:7px;
 }
-.tengocuenta {
+.tengocuenta-button {
     position: absolute;
+    border:none;
     top: 68px;
     right: 117px;
     background-color: #D9D9D9;
-    border: none;
     color: #3B3486;
     padding: 10px 20px;
-    font-size: 16px;
+ /*   font-size: 16px;*/
     border-radius: 10px;
     width: 267px;
     font-family: 'Raleway', sans-serif;
 }
+    .tengocuenta-button:hover {
+        background-color: #9f9f9f;
+        color: black;
+    }
