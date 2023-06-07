@@ -20,7 +20,7 @@ html {
         display: flex;
         flex-direction: column;
     }
-}
+
 header {
     border-bottom: 1px solid #808080;
     padding: 0;
