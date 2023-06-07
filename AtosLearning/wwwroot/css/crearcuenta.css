@@ -15,7 +15,7 @@ h1 {
 }
 .rectangle {
     width: 970px;
-    height: 610px;
+    height: 510px;
     background-color: white;
     border: 1px solid black;
     margin-left: 240px;
@@ -42,13 +42,13 @@ h1 {
     }
 
 .rectangle input[class="name"] {
-    width: 80%;
+    width: 39%;
     height: 50px !important;
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-    margin-right: 130px;
+    margin-right: 95px;
     margin-left: -85px;
     padding-left: 20px;
 }
@@ -56,7 +56,7 @@ h1 {
     .rectangle .crear-cuenta {
         margin-bottom: 30px; 
         color: black;
-        font-size: 50px;
+        font-size: 45px;
         font-weight: bold;
        margin-left: 35px;
     }
@@ -65,7 +65,7 @@ h1 {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
-    padding-top: 30px;
+    padding-top: 10px;
     margin-left: 60px;
 }
 
@@ -81,21 +81,28 @@ h1 {
 
 .button-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     padding-top: 10px;
 }
 
     .button-container button {
-        margin-bottom: 1px;
-        height: 50px;
-        width: 210px;
+        margin-bottom: 15px;
+        height: 40px;
+        width: 200px;
         border-radius: 20px;
-        margin-left: 75px;
-        margin-top: 9px;
+        margin-left: -20px;
+        margin-top: 10px;
+        border:thin;
         
     }
 .green-button {
+    border:none;
     background-color: green;
     color: white;
+    margin-right:45px;
     
 }
+
+    .green-button:hover {
+        background-color: darkgreen;
+    }
