@@ -1,28 +1,122 @@
-﻿body {
+﻿
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.principal{
+    max-width:100% !important;
+    margin: 0px auto !important;
+}
+
+.row.display-flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.row.display-flex > [class*='col-'] {
+     display: flex;
+     flex-direction: column;
+}
+
+header {
+    border-bottom: 1px solid #808080;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    margin:0px 0px;
+}
+
+body {
+    margin: 0px 0px;
     background-color: white;
+    padding: 0;
+    justify-content: space-between;
+}
+
+
+.button-rectangle {
+    box-sizing: border-box;
+    width: 319px;
+    height: 238px;
+    left: 87px;
+    top: 219px;
+    background: #FBFCFD;
+    border-width: 1px 1px 5px 1px;
+    border-style: solid;
+    border-color: #9456CF;
+    border-radius: 59px;
+    font-size: 20px;
+}
+
+* {
     margin: 0;
     padding: 0;
-}
-header {
-    
-}
-
-.line {
-    width: 100%;
-    height: 0;
-    border-top: 1px solid black;
-    position: fixed;
-    top: 0;
-    left: 0;
-    padding-top: 30px;
-    margin: 100px 0;
+    box-sizing: border-box;
 }
 
 
-.create-exam-button {
-   
-    margin-right: 10px;
-    
+
+#header-left {
+    margin-left: 1rem;
+}
+
+#header-left-top {
+    display: flex;
+    align-items: flex-end;
+}
+
+#page-title {
+    font-size: 1.5rem;
+}
+
+#text-logo {
+    margin-right: 5px;
+    font-size: 3rem;
+}
+
+#header-right {
+    display: flex;
+    margin-right: 2rem;
+}
+
+#right-side-name {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#right-side-img {
+    margin-top:2rem;
+    margin-left: 1rem;
+}
+
+#user-img {
+    height: 4rem;
+    width:4rem;
+}
+
+.blue {
+    color: #2571AF;
+}
+
+.yellow {
+    color: #FFC715;
+}
+
+h2 {
+    color: #FFC715;
+    font-size: 50px;
+    margin-left: 10px;
+    margin-top: 40px;
 }
 
 
@@ -33,62 +127,98 @@ header {
     
 }
 
-.buscarexamen{
-    color: black;
-    margin-right:40px;
-    padding-top: 40px;
-}
 .buscar {
     background-color: #8833AA;
     color: white;
     border-radius: 20px;
     border: 0px;
-    width: 80px;
-}
-.button-container{
-    display:flex;
-    align-items:center
-}
-.button-search-container {
-    display: flex;
-    align-items: center;
-   
-}
-.hola{
-    color: #0173AF;
-    font-family: 100px;
-}
-
-   
-
-.content{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    width: 100px;
+    height:30px;
+    margin-top:10px;
 }
 
 .search-bar {
-    margin-right: 10px;
     padding: 8px;
     border: 1px solid #8833AA;
     border-radius: 20px;
-    font-size: 16px;
+    font-size: 25px;
     width: 450px;
+    height: 47px;
     padding-left: 20px;
-    margin-top: 10px;
 }
 
-.crear-examen-button {
-    margin-left: 10px;
+.columnabuscar {
+    margin-right: 20px;
+    margin-top: 90px;
+    margin-left:50px;
 }
+
+
 .button-rectangle {
-    background-color: white;
-    border: 2px solid purple;
-    color: purple;
     padding: 8px 16px;
     cursor: pointer;
-    margin-top: 50px;
-    height: 200px;
-    width: 300px;
+    margin-top: 60px;
+    margin-left: 0px;
+    margin-bottom:60px;
+    box-sizing: border-box;
+    width: 319px;
+    height: 238px;
+    background: #FBFCFD;
+    border-width: 1px 1px 4px 1px;
+    border-style: solid;
+    border-color: #9456CF;
+    border-radius: 59px;
+    font-style: normal;
+    font-size: 25px;
+    font-family: 'Raleway', sans-serif;
+    line-height: 38px;
 }
 
+.p{
+    font-size:30px;
+}
+@media (max-width: 400px) {
+    .carousel-inner .carousel-item > div {
+        display: none;
+    }
+
+        .carousel-inner .carousel-item > div:first-child {
+            display: block;
+        }
+}
+
+.carousel-inner .carousel-item.active,
+.carousel-inner .carousel-item-next,
+.carousel-inner .carousel-item-prev {
+    display: flex;
+}
+
+/* display 3 */
+@media (min-width: 400px) {
+
+    .carousel-inner .carousel-item-right.active,
+    .carousel-inner .carousel-item-next {
+        transform: translateX(33.333%);
+    }
+
+    .carousel-inner .carousel-item-left.active,
+    .carousel-inner .carousel-item-prev {
+        transform: translateX(-33.333%);
+    }
+}
+
+.carousel-inner .carousel-item-right,
+.carousel-inner .carousel-item-left {
+    transform: translateX(0);
+}
+ 
+
+.my-flex-row{
+    display: flex; 
+    flex-direction: row; 
+}
+
+.my-flex-column {
+    display: flex; 
+    flex-direction: column;
+}

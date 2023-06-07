@@ -12,11 +12,31 @@ html {
     position: relative;
     min-height: 100%;
 }
+body {
+    margin: 0px 0px;
+    background-color: white;
+    padding: 0;
+    justify-content: space-between;
+}
 
-body{
-    margin:0px;
-    padding: 0px;
-    background-color: #FFFFFF;
+.row.display-flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+    .row.display-flex > [class*='col-'] {
+        display: flex;
+        flex-direction: column;
+    }
+
+.my-flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.my-flex-column {
+    display: flex;
+    flex-direction: column;
 }
 
 .rounded-button {
@@ -75,19 +95,21 @@ body{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-
-
 }
+
 header {
-    border-bottom: 1px solid #000000;
-    padding: 1rem 0;
+    border-bottom: 1px solid #808080;
+    padding: 0;
     display: flex;
     justify-content: space-between;
+    margin: 0px 0px;
 }
 
+
 #header-left {
-    margin-left: 2rem;
+    margin-left: 1rem;
 }
+
 #header-left-top {
     display: flex;
     align-items: flex-end;
@@ -96,9 +118,10 @@ header {
 #page-title {
     font-size: 1.5rem;
 }
+
 #text-logo {
-    margin-right: 10px;
-    font-size: 2rem;
+    margin-right: 5px;
+    font-size: 3rem;
 }
 
 #header-right {
@@ -106,7 +129,7 @@ header {
     margin-right: 2rem;
 }
 
-#right-side-name{
+#right-side-name {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -114,11 +137,13 @@ header {
 }
 
 #right-side-img {
+    margin-top: 2rem;
     margin-left: 1rem;
 }
 
 #user-img {
     height: 4rem;
+    width: 4rem;
 }
 
 .blue {
@@ -129,28 +154,14 @@ header {
     color: #FFC715;
 }
 
-.right-aligned {
-    margin-left: 640px;
-    position: absolute;
-    margin-top: 140px;
-
-}
-.logo-container {
-    display: flex;
-    align-items: center;
-}
-h1 {
-    color: white;
-    font-size: 59px;
-    font-family: 'Raleway', sans-serif;
-    font-weight: bold;
-}
-h2{
+h2 {
     color: #FFC715;
-    font-size: 95px;
-    margin-left: 28px;
+    font-size: 50px;
+    margin-left: 10px;
     margin-top: 40px;
 }
+
+
 p {
     color: white;
     font-size: 23px;

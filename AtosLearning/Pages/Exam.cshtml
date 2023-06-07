@@ -2,31 +2,33 @@
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @model AtosLearning.Pages.ExamModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Crear examen";
 }
 
 <head>
     <link href="css/exam.css" rel="stylesheet" />
 </head>
 
-<header>
-    <div id="header-left">
-        <div id="header-left-top">
-            <h2 id="text-logo" class="blue">AtosLearning</h2>
-            <h3 class="blue">Profesores</h3>
+<header class="min-vw-100 display-flex flex-row justify-content-between align-items-center px-5">
+    <div class="my-flex-row">
+        <div class="my-flex-column me-1">
+            <h2 class="m-0 blue d-inline-block fs-1">AtosLearning</h2>
+            <h4 class="yellow d-inline-block fs-">Home page</h4>
         </div>
-        <div class="header-left-bottom">
-            <h3 id="page-title" class="yellow">Crear examen</h3>
+        <div class="my-flex-column justify-content-center mb-1">
+            <h5 class="blue">Profesores</h5>
         </div>
+
     </div>
-    <div id="header-right">
-                <div id="right-side-name">
-                    <h3>Thomas Rubio</h3>
-                    <h4>Ver mi perfil</h4>
-                </div>
-    <div id="right-side-img">
-        <img id="user-img" src="images/profile-icon.png" alt="profile">
-    </div>
+
+    <div class="my-flex-row">
+        <div class="my-flex-column align-items-center me-2">
+            <h4>Thomas Rubio</h4>
+            <h5>Ver mi perfil</h5>
+        </div>
+        <div class="my-flex-column align-items-center justify-content-center">
+            <img id="user-img" src="images/profile.png" alt="profile" />
+        </div>
     </div>
 </header>
 
