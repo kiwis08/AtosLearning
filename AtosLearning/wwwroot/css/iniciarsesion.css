@@ -47,7 +47,7 @@ h1 {
     }
 
     .rectangle .crear-cuenta {
-        margin-bottom: 40px; 
+        margin-bottom: 28px; 
         color: black;
         font-size: 50px;
         font-weight: bold;
@@ -58,11 +58,11 @@ h1 {
 .button-container {
     display: flex;
     flex-direction: column;
-    padding-top: 40px;
+    padding-top: 30px;
 }
 
     .button-container button {
-        margin-bottom: 40px;
+        margin-bottom: 17px;
         height: 50px;
         width: 250px;
         border-radius: 20px;
