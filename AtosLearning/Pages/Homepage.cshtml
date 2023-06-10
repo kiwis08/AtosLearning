@@ -8,6 +8,10 @@
     <meta charset="utf-8" />
     <title>Homepage</title>
     <link href="css/homepage.css" rel="stylesheet"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/swiper@8/swiper-bundle.min.css" rel="stylesheet" />
+    <link href="css/carrusel.css" rel="stylesheet" />
 </head>
 <header class="min-vw-100 display-flex flex-row justify-content-between align-items-center px-5">
     <div class="my-flex-row">
@@ -56,12 +60,12 @@
                 </div>
             </div>
     </div>
-
+   
 <div class="row justify-content-between">
     <div class="col-4 text-start align-items-start">
 
-        <h4>Materias</h4>
-        <button class="buscar" onclick="location.href='/resultado'">DEMO RESULTADO</button>
+        <h4>Examenes pendientes</h4>
+        <button class="buscar" onclick="location.href='/resultado'">Prueba</button>
             </div>
         <div class="col-3 text-center align-content-end">
         <button class="btn btn-secondary btn-lg dropdown-toggle" id="subject-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -83,246 +87,323 @@
             }
         </ul>
         </div>
-        </div>
-
-        <div class="container text-center my-4">
-            <div class="row mx-auto my-auto">
-                <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
-                    <div class="carousel-inner w-100" role="listbox">
-                        <div class="carousel-item active">
-                            <div class="col-md-3">
-                                <div class="card card-body">
-                                    <img class="img-fluid" src="http://placehold.it/380?text=1">
-                                </div>
-                            </div>
+</div>
+    <section id="tranding">
+        <div class="container">
+            <div class="swiper tranding-slider">
+                <div class="swiper-wrapper">
+                    <!-- Slide-start -->
+                    <div class="swiper-slide tranding-slide">
+                        <div class="tranding-slide-img">
+                            <img src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81rCQhNbH32xxH-df0O1bx6-mPDpXM4baSMECaKQQzGN3PMMZslOA-mGQatZTjGoTH9D1PGySUt613z0p4EqtJ8YooleUQ=s2560" alt="Tranding">
                         </div>
-                        <div class="carousel-item">
-                            <div class="col-md-3">
-                                <div class="card card-body">
-                                    <img class="img-fluid" src="http://placehold.it/380?text=2">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="col-md-4">
-                                <div class="card card-body">
-                                    <img class="img-fluid" src="http://placehold.it/380?text=3">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="col-md-4">
-                                <div class="card card-body">
-                                    <img class="img-fluid" src="http://placehold.it/380?text=4">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="col-md-4">
-                                <div class="card card-body">
-                                    <img class="img-fluid" src="http://placehold.it/380?text=5">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="col-md-4">
-                                <div class="card card-body">
-                                    <img class="img-fluid" src="http://placehold.it/380?text=6">
-                                </div>
+                        <div class="tranding-slide-content">
+                            <div class="tranding-slide-content-bottom">
+                                <h2 class="food-name">
+                                    Algebra 1
+                                </h2>
+                                <h3 class="food-rating">
+                                    <span>4.5</span>
+                                    <div class="rating">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                    </div>
+                                </h3>
                             </div>
                         </div>
                     </div>
-                    <a class="carousel-control-prev w-auto" href="#recipeCarousel" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next w-auto" href="#recipeCarousel" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
+                    <!-- Slide-end -->
+                    <!-- Slide-start -->
+                    <div class="swiper-slide tranding-slide">
+                        <div class="tranding-slide-img">
+                            <img src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81pH_WqC0Ow1ZLtoTtccir0FflK7fAnw3TSPw76T8sVl1ALfaLZavkN6eQ8b31wvTLE9ogW94lpHwDW1ekg9D6nre7vCMw=s2560" alt="Tranding">
+                        </div>
+                        <div class="tranding-slide-content">
+                            <div class="tranding-slide-content-bottom">
+                                <h2 class="food-name">
+                                    Matemáticas 1
+                                </h2>
+                                <h3 class="food-rating">
+                                    <span>4.5</span>
+                                    <div class="rating">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                    </div>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide-end -->
+                    <!-- Slide-start -->
+                    <div class="swiper-slide tranding-slide">
+                        <div class="tranding-slide-img">
+                            <img src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81oT-suyO5eN0rWrRLW7m3YJRfeO0dAt30X7ksr_1eDJgVBIdDiEV28d7mwD8PtyxF97A3j7btdfwBWH2Cs7zaKcXDJu=s1600" alt="Tranding">
+                        </div>
+                        <div class="tranding-slide-content">
+                            <div class="tranding-slide-content-bottom">
+                                <h2 class="food-name">
+                                    Computación 1
+                                </h2>
+                                <h3 class="food-rating">
+                                    <span>4.5</span>
+                                    <div class="rating">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                    </div>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide-end -->
+                    <!-- Slide-start -->
+                    <div class="swiper-slide tranding-slide">
+                        <div class="tranding-slide-img">
+                            <img src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81qf81v4ztqbobBMHnFjzMQ7ukfxyqE1MbpcjQVqfpOoaRMKLjwmune-GX9sco2D0McuHS2QJJtOxtEDx5FcvlYtoKhu=s2560" alt="Tranding">
+                        </div>
+                        <div class="tranding-slide-content">
+                            <div class="tranding-slide-content-bottom">
+                                <h2 class="food-name">
+                                    Ingles 3
+                                </h2>
+                                <h3 class="food-rating">
+                                    <span>4.5</span>
+                                    <div class="rating">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                    </div>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide-end -->
+                    <!-- Slide-start -->
+                    <div class="swiper-slide tranding-slide">
+                        <div class="tranding-slide-img">
+                            <img src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81qxawwAwnLaA258a3N8VWhcCQup2KjhXwN4HdrFOhGrviZXqLqU8wwoaVIVJKcVEleTdTS2S7HXZfNyd5L611Inq9Pcwg=s1600 " alt="Tranding">
+                        </div>
+                        <div class="tranding-slide-content">
+                            <div class="tranding-slide-content-bottom">
+                                <h2 class="food-name">
+                                    Pane Cake
+                                </h2>
+                                <h3 class="food-rating">
+                                    <span>4.5</span>
+                                    <div class="rating">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                    </div>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide-end -->
                 </div>
+
+                <div class="tranding-slider-control">
+                    <div class="swiper-button-prev slider-arrow">
+                        <ion-icon name="arrow-back-outline"></ion-icon>
+                    </div>
+                    <div class="swiper-button-next slider-arrow">
+                        <ion-icon name="arrow-forward-outline"></ion-icon>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+
             </div>
         </div>
-        <
-<div class="row justify-content-between">
-    <div class="col-4 text-start align-items-start">
+    </section>
+    <h4>Examenes anteriores</h4>
+    <section id="tranding">
+        <div class="container">
+            <div class="swiper tranding-slider">
+                <div class="swiper-wrapper">
+                    <!-- Slide-start -->
+                    <div class="swiper-slide tranding-slide">
+                        <div class="tranding-slide-img">
+                            <img src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81rCQhNbH32xxH-df0O1bx6-mPDpXM4baSMECaKQQzGN3PMMZslOA-mGQatZTjGoTH9D1PGySUt613z0p4EqtJ8YooleUQ=s2560" alt="Tranding">
+                        </div>
+                        <div class="tranding-slide-content">
+                            <div class="tranding-slide-content-bottom">
+                                <h2 class="food-name">
+                                    Algebra 1
+                                </h2>
+                                <h3 class="food-rating">
+                                    <span>4.5</span>
+                                    <div class="rating">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                    </div>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide-end -->
+                    <!-- Slide-start -->
+                    <div class="swiper-slide tranding-slide">
+                        <div class="tranding-slide-img">
+                            <img src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81pH_WqC0Ow1ZLtoTtccir0FflK7fAnw3TSPw76T8sVl1ALfaLZavkN6eQ8b31wvTLE9ogW94lpHwDW1ekg9D6nre7vCMw=s2560" alt="Tranding">
+                        </div>
+                        <div class="tranding-slide-content">
+                            <div class="tranding-slide-content-bottom">
+                                <h2 class="food-name">
+                                    Matemáticas 1
+                                </h2>
+                                <h3 class="food-rating">
+                                    <span>4.5</span>
+                                    <div class="rating">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                    </div>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide-end -->
+                    <!-- Slide-start -->
+                    <div class="swiper-slide tranding-slide">
+                        <div class="tranding-slide-img">
+                            <img src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81oT-suyO5eN0rWrRLW7m3YJRfeO0dAt30X7ksr_1eDJgVBIdDiEV28d7mwD8PtyxF97A3j7btdfwBWH2Cs7zaKcXDJu=s1600" alt="Tranding">
+                        </div>
+                        <div class="tranding-slide-content">
+                            <div class="tranding-slide-content-bottom">
+                                <h2 class="food-name">
+                                    Computación 1
+                                </h2>
+                                <h3 class="food-rating">
+                                    <span>4.5</span>
+                                    <div class="rating">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                    </div>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide-end -->
+                    <!-- Slide-start -->
+                    <div class="swiper-slide tranding-slide">
+                        <div class="tranding-slide-img">
+                            <img src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81qf81v4ztqbobBMHnFjzMQ7ukfxyqE1MbpcjQVqfpOoaRMKLjwmune-GX9sco2D0McuHS2QJJtOxtEDx5FcvlYtoKhu=s2560" alt="Tranding">
+                        </div>
+                        <div class="tranding-slide-content">
+                            <div class="tranding-slide-content-bottom">
+                                <h2 class="food-name">
+                                    Ingles 3
+                                </h2>
+                                <h3 class="food-rating">
+                                    <span>4.5</span>
+                                    <div class="rating">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                    </div>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide-end -->
+                    <!-- Slide-start -->
+                    <div class="swiper-slide tranding-slide">
+                        <div class="tranding-slide-img">
+                            <img src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81qxawwAwnLaA258a3N8VWhcCQup2KjhXwN4HdrFOhGrviZXqLqU8wwoaVIVJKcVEleTdTS2S7HXZfNyd5L611Inq9Pcwg=s1600 " alt="Tranding">
+                        </div>
+                        <div class="tranding-slide-content">
+                            <div class="tranding-slide-content-bottom">
+                                <h2 class="food-name">
+                                    Pane Cake
+                                </h2>
+                                <h3 class="food-rating">
+                                    <span>4.5</span>
+                                    <div class="rating">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                    </div>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide-end -->
+                </div>
 
-        <h4>Examenes anteriores</h4>
-    </div>
-    <div class="col-3 text-center align-content-end">
-        <button class="btn btn-secondary btn-lg dropdown-toggle" id="subject-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            @if (Model.SelectedSubject != null)
-            {
-                @Model.SelectedSubject.Name
-            }
-            else
-            {
-                <span>Filtrar</span>
-            }
-        </button>
-        <ul class="dropdown-menu">
-            @foreach (var subject in Model.Subjects)
-            {
-                <li>
-                    <button class="dropdown-item" onclick="onSelectDropdown()" name="subjectId" value="@subject.ID">@subject.Name</button>
-                </li>
-            }
-        </ul>
-    </div>
-</div>
-<div class="container text-center my-4">
-    <div class="row mx-auto my-auto">
-        <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
-            <div class="carousel-inner w-100" role="listbox">
-                <div class="carousel-item active">
-                    <div class="col-md-3">
-                        <div class="card card-body">
-                            <img class="img-fluid" src="http://placehold.it/380?text=1">
-                        </div>
+                <div class="tranding-slider-control">
+                    <div class="swiper-button-prev slider-arrow">
+                        <ion-icon name="arrow-back-outline"></ion-icon>
                     </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="col-md-3">
-                        <div class="card card-body">
-                            <img class="img-fluid" src="http://placehold.it/380?text=2">
-                        </div>
+                    <div class="swiper-button-next slider-arrow">
+                        <ion-icon name="arrow-forward-outline"></ion-icon>
                     </div>
+                    <div class="swiper-pagination"></div>
                 </div>
-                <div class="carousel-item">
-                    <div class="col-md-4">
-                        <div class="card card-body">
-                            <img class="img-fluid" src="http://placehold.it/380?text=3">
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="col-md-4">
-                        <div class="card card-body">
-                            <img class="img-fluid" src="http://placehold.it/380?text=4">
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="col-md-4">
-                        <div class="card card-body">
-                            <img class="img-fluid" src="http://placehold.it/380?text=5">
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="col-md-4">
-                        <div class="card card-body">
-                            <img class="img-fluid" src="http://placehold.it/380?text=6">
-                        </div>
-                    </div>
-                </div>
+
             </div>
-            <a class="carousel-control-prev w-auto" href="#recipeCarousel" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next w-auto" href="#recipeCarousel" role="button" data-slide="next">
-                <span class="carousel-control-next-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
         </div>
-    </div>
-</div>
+    </section>
 
-<div class="row justify-content-between">
-    <div class="col-4 text-start align-items-start">
-
-        <h4>Examenes pendientes</h4>
-    </div>
-    <div class="col-3 text-center align-content-end">
-        <button class="btn btn-secondary btn-lg dropdown-toggle" id="subject-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            @if (Model.SelectedSubject != null)
-            {
-                @Model.SelectedSubject.Name
-            }
-            else
-            {
-                <span>Filtrar</span>
-            }
-        </button>
-        <ul class="dropdown-menu">
-            @foreach (var subject in Model.Subjects)
-            {
-                <li>
-                    <button class="dropdown-item" onclick="onSelectDropdown()" name="subjectId" value="@subject.ID">@subject.Name</button>
-                </li>
-            }
-        </ul>
-    </div>
 </div>
-
-<div class="container text-center my-4">
-    <div class="row mx-auto my-auto">
-        <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
-            <div class="carousel-inner w-100" role="listbox">
-                <div class="carousel-item active">
-                    <div class="col-md-3">
-                        <div class="card card-body">
-                                <img class="img-fluid" src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81pH_WqC0Ow1ZLtoTtccir0FflK7fAnw3TSPw76T8sVl1ALfaLZavkN6eQ8b31wvTLE9ogW94lpHwDW1ekg9D6nre7vCMw=s2560" onclick="location.href='/resultado'">;
-1">
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="col-md-3">
-                        <div class="card card-body">
-                            <img class="img-fluid" src="http://placehold.it/380?text=2">
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="col-md-4">
-                        <div class="card card-body">
-                            <img class="img-fluid" src="http://placehold.it/380?text=3">
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="col-md-4">
-                        <div class="card card-body">
-                            <img class="img-fluid" src="http://placehold.it/380?text=4">
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="col-md-4">
-                        <div class="card card-body">
-                            <img class="img-fluid" src="http://placehold.it/380?text=5">
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="col-md-4">
-                        <div class="card card-body">
-                            <img class="img-fluid" src="http://placehold.it/380?text=6">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <a class="carousel-control-prev w-auto" href="#recipeCarousel" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next w-auto" href="#recipeCarousel" role="button" data-slide="next">
-                <span class="carousel-control-next-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
-    </div>
-</div>
-</div>
-<!-- Swiper JS -->
-<script src="js/swiper-bundle.min.js"></script>
-<!-- JavaScript -->
-<script src="js/script.js"></script>    
-    <script>function performSearch() {
+   
+<script>function performSearch() {
             var searchInput = document.querySelector(".search-bar").value;
             // Perform search logic with the searchInput value
             // Example: Display search results or perform an AJAX request
             console.log("Performing search for: " + searchInput);
-        }</script>
+        }
+</script>
+
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+    <script>
+
+        var TrandingSlider = new Swiper('.tranding-slider', {
+            effect: 'coverflow',
+            grabCursor: true,
+            centeredSlides: true,
+            loop: true,
+            slidesPerView: 'auto',
+            coverflowEffect: {
+                rotate: 0,
+                stretch: 0,
+                depth: 100,
+                modifier: 2.5,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            }
+        });
+
+    </script>
