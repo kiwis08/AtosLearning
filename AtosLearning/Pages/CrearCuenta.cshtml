@@ -2,6 +2,7 @@
 @model AtosLearning.Pages.CrearCuentaModel
 @{
 }
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,14 +22,14 @@
         <form method="post" asp-page-handler="OnPost">
             <input class="name" placeholder="Nombre" name="Nombre" required />
             <input class="name" placeholder="Apellido" name="Apellido" required />
-            <input type="email" placeholder="Correo" name="Correo" required/>
-            <input type="password" placeholder="Contraseña" name="Contraseña" required/>
+            <input type="email" placeholder="Correo" name="Correo" required />
+            <input type="password" placeholder="Contraseña" name="Contraseña" required />
 
             <div class="multiple-choice">
                 <label for="profesor">Soy:</label>
-                <input type="radio" id="profesor" name="Role" value="Profesor" required/>
+                <input type="radio" id="profesor" name="Role" value="Profesor" required />
                 <label for="profesor">Profesor</label>
-                <input type="radio" id="alumno" name="Role" value="Alumno" required/>
+                <input type="radio" id="alumno" name="Role" value="Alumno" required />
                 <label for="alumno">Alumno</label>
             </div>
 
@@ -38,5 +39,14 @@
             </div>
         </form>
     </div>
+
+    @if (Model.Role == "Alumno")
+    {
+        <script>window.location.href = '/PlataformaAlumnos';</script>
+    }
+    else if (Model.Role == "Profesor")
+    {
+        <script>window.location.href = '/Exam';</script>
+    }
 </body>
 </html>
