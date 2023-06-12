@@ -4,22 +4,20 @@ namespace AtosLearning.Models;
 
 public class Subject
 {
-    [JsonPropertyName("id")]
     public int ID { get; set; }
     
-    [JsonPropertyName("name")]
     public string Name { get; set; }
+    public string Description { get; set; }
     
-    [JsonPropertyName("teacherId")]
     public int TeacherId { get; set; }
     
-    [JsonPropertyName("courseId")]
     public int CourseId { get; set; }
     
-    public Subject(int id, string name, int teacherId, int courseId)
+    public Subject(int id, string name, string description, int teacherId, int courseId)
     {
         ID = id;
         Name = name;
+        Description = description;
         TeacherId = teacherId;
         CourseId = courseId;
     }
