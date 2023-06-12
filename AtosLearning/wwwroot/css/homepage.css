@@ -58,6 +58,25 @@ body {
     padding: 0;
     justify-content: space-between;
 }
+.nombremateria {
+    background-color: #FFC20E;
+    color: black;
+    border-radius: 10px;
+    border: 2px;
+    width: 100px;
+    height: 30px;
+    margin-top: 10px;
+}
+
+.crearmateria {
+    background-color: #8833AA;
+    color: white;
+    border-radius: 20px;
+    border: 0px;
+    width: 100px;
+    height: 30px;
+    margin-top: 10px;
+}
 
 
 .button-rectangle {
