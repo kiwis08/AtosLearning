@@ -23,7 +23,7 @@
 
     <div class="my-flex-row">
         <div class="my-flex-column align-items-center me-2">
-            <h4>@Model.CurrentTeacher.Name </h4>
+            <h4>@Model.CurrentTeacher.Name @Model.CurrentTeacher.Surname</h4>
             <h5>Ver mi perfil</h5>
         </div>
         <div class="my-flex-column align-items-center justify-content-center">
@@ -40,11 +40,16 @@
         <div class="col">
             <form method="post" asp-page-handler="SaveExam" id="exam-form">
             <input asp-for="ExamTitle" class="form-control exam-field" id="exam-title" placeholder="Nombre del examen">
+
             <input asp-for="ExamDescription" class="form-control exam-field" id="exam-description" placeholder="Descripción">
             </form>
             <input class="form-control" placeholder="Temario">
         </div>
         <div class="col">
+            <label for="start">Fecha límite:</label><br />
+            <input type="date" id="start" name="trip-start"
+                   value="2023-06-12"
+                   min="2023-06-12" max="2023-12-31">
             <form method="post" asp-page-handler="SetSelectedSubject" id="subject-form">
                 <input type="hidden" name="ExamTitle" id="hidden-exam-title" value="@Model.ExamTitle"/>
                 <input type="hidden" name="ExamDescription" id="hidden-exam-description" value="@Model.ExamDescription"/>

@@ -43,10 +43,10 @@
 
 <div class="principal">
     <div class="row ">
-        <div class="col-4 text-center align-content-start">
+        <div class="col-3 text-center align-content-start">
                 <button class="button-rectangle" onclick="location.href='/Exam'">Crear examen</button>
         </div>
-             <div class="col-8 align-items-start">
+        <div class="col-5 align-items-start">
                  <div class="columnabuscar">
                        <div class="row">
                             <h4>Buscar examen</h4><br />
@@ -58,8 +58,23 @@
                             <button class="buscar" onclick="performSearch()">Buscar</button>
                         </div>
                 </div>
+        </div>
+        <div class="col-4" style="display: grid;padding: 20px 50px 20px 20px;align-content: center;justify-items: center;">
+            <div class="row align-items-center" style="display:flex;">
+                <h4>Materias</h4>
             </div>
-    </div>
+
+            <div class="col align-items-start" style="display:flex; flex-wrap:wrap; justify-content:space-around;">
+                    @foreach (var subject in Model.Subjects)
+                    {
+                    <button class="buscar" onclick="location.href='/resultado'">@subject.Name</button>
+                    }
+            </div>
+            <div class="row align-items-center" style="display:flex; justify-content:center;">
+                <button class="buscar" onclick="location.href='/resultado'">Crear materia</button>
+            </div>
+        </div>
+        </div>
    
 <div class="row justify-content-between">
     <div class="col-4 text-start align-items-start">
@@ -67,151 +82,37 @@
         <h4>Examenes pendientes</h4>
         <button class="buscar" onclick="location.href='/resultado'">Prueba</button>
             </div>
-        <div class="col-3 text-center align-content-end">
-        <button class="btn btn-secondary btn-lg dropdown-toggle" id="subject-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            @if (Model.SelectedSubject != null)
-            {
-                @Model.SelectedSubject.Name
-            }
-            else
-            {
-                <span>Filtrar</span>
-            }
-        </button>
-        <ul class="dropdown-menu">
-            @foreach (var subject in Model.Subjects)
-            {
-                <li>
-                    <button class="dropdown-item" onclick="onSelectDropdown()" name="subjectId" value="@subject.ID">@subject.Name</button>
-                </li>
-            }
-        </ul>
-        </div>
 </div>
     <section id="tranding">
         <div class="container">
             <div class="swiper tranding-slider">
                 <div class="swiper-wrapper">
                     <!-- Slide-start -->
-                    <div class="swiper-slide tranding-slide">
-                        <div class="tranding-slide-img">
-                            <img src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81rCQhNbH32xxH-df0O1bx6-mPDpXM4baSMECaKQQzGN3PMMZslOA-mGQatZTjGoTH9D1PGySUt613z0p4EqtJ8YooleUQ=s2560" alt="Tranding">
-                        </div>
-                        <div class="tranding-slide-content">
-                            <div class="tranding-slide-content-bottom">
-                                <h2 class="food-name">
-                                    Algebra 1
-                                </h2>
-                                <h3 class="food-rating">
-                                    <span>4.5</span>
-                                    <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-                                        <ion-icon name="star"></ion-icon>
-                                        <ion-icon name="star"></ion-icon>
-                                        <ion-icon name="star"></ion-icon>
-                                        <ion-icon name="star"></ion-icon>
-                                    </div>
-                                </h3>
+                    @foreach (var subject in Model.Subjects)
+                    {
+                        <div class="swiper-slide tranding-slide">
+                            <div class="tranding-slide-img">
+                                <img src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81rCQhNbH32xxH-df0O1bx6-mPDpXM4baSMECaKQQzGN3PMMZslOA-mGQatZTjGoTH9D1PGySUt613z0p4EqtJ8YooleUQ=s2560" alt="Tranding">
+                            </div>
+                            <div class="tranding-slide-content">
+                                <div class="tranding-slide-content-bottom">
+                                    <h2 class="food-name">
+                                        @subject.Name
+                                    </h2>
+                                    <h3 class="food-rating">
+                                        <span>4.5</span>
+                                        <div class="rating">
+                                            <ion-icon name="star"></ion-icon>
+                                            <ion-icon name="star"></ion-icon>
+                                            <ion-icon name="star"></ion-icon>
+                                            <ion-icon name="star"></ion-icon>
+                                            <ion-icon name="star"></ion-icon>
+                                        </div>
+                                    </h3>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- Slide-end -->
-                    <!-- Slide-start -->
-                    <div class="swiper-slide tranding-slide">
-                        <div class="tranding-slide-img">
-                            <img src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81pH_WqC0Ow1ZLtoTtccir0FflK7fAnw3TSPw76T8sVl1ALfaLZavkN6eQ8b31wvTLE9ogW94lpHwDW1ekg9D6nre7vCMw=s2560" alt="Tranding">
-                        </div>
-                        <div class="tranding-slide-content">
-                            <div class="tranding-slide-content-bottom">
-                                <h2 class="food-name">
-                                    Matemáticas 1
-                                </h2>
-                                <h3 class="food-rating">
-                                    <span>4.5</span>
-                                    <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-                                        <ion-icon name="star"></ion-icon>
-                                        <ion-icon name="star"></ion-icon>
-                                        <ion-icon name="star"></ion-icon>
-                                        <ion-icon name="star"></ion-icon>
-                                    </div>
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Slide-end -->
-                    <!-- Slide-start -->
-                    <div class="swiper-slide tranding-slide">
-                        <div class="tranding-slide-img">
-                            <img src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81oT-suyO5eN0rWrRLW7m3YJRfeO0dAt30X7ksr_1eDJgVBIdDiEV28d7mwD8PtyxF97A3j7btdfwBWH2Cs7zaKcXDJu=s1600" alt="Tranding">
-                        </div>
-                        <div class="tranding-slide-content">
-                            <div class="tranding-slide-content-bottom">
-                                <h2 class="food-name">
-                                    Computación 1
-                                </h2>
-                                <h3 class="food-rating">
-                                    <span>4.5</span>
-                                    <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-                                        <ion-icon name="star"></ion-icon>
-                                        <ion-icon name="star"></ion-icon>
-                                        <ion-icon name="star"></ion-icon>
-                                        <ion-icon name="star"></ion-icon>
-                                    </div>
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Slide-end -->
-                    <!-- Slide-start -->
-                    <div class="swiper-slide tranding-slide">
-                        <div class="tranding-slide-img">
-                            <img src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81qf81v4ztqbobBMHnFjzMQ7ukfxyqE1MbpcjQVqfpOoaRMKLjwmune-GX9sco2D0McuHS2QJJtOxtEDx5FcvlYtoKhu=s2560" alt="Tranding">
-                        </div>
-                        <div class="tranding-slide-content">
-                            <div class="tranding-slide-content-bottom">
-                                <h2 class="food-name">
-                                    Ingles 3
-                                </h2>
-                                <h3 class="food-rating">
-                                    <span>4.5</span>
-                                    <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-                                        <ion-icon name="star"></ion-icon>
-                                        <ion-icon name="star"></ion-icon>
-                                        <ion-icon name="star"></ion-icon>
-                                        <ion-icon name="star"></ion-icon>
-                                    </div>
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Slide-end -->
-                    <!-- Slide-start -->
-                    <div class="swiper-slide tranding-slide">
-                        <div class="tranding-slide-img">
-                            <img src="https://lh3.googleusercontent.com/drive-viewer/AFGJ81qxawwAwnLaA258a3N8VWhcCQup2KjhXwN4HdrFOhGrviZXqLqU8wwoaVIVJKcVEleTdTS2S7HXZfNyd5L611Inq9Pcwg=s1600 " alt="Tranding">
-                        </div>
-                        <div class="tranding-slide-content">
-                            <div class="tranding-slide-content-bottom">
-                                <h2 class="food-name">
-                                    Pane Cake
-                                </h2>
-                                <h3 class="food-rating">
-                                    <span>4.5</span>
-                                    <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-                                        <ion-icon name="star"></ion-icon>
-                                        <ion-icon name="star"></ion-icon>
-                                        <ion-icon name="star"></ion-icon>
-                                        <ion-icon name="star"></ion-icon>
-                                    </div>
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Slide-end -->
+                    }
                 </div>
 
                 <div class="tranding-slider-control">

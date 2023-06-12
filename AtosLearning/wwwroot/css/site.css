@@ -21,7 +21,7 @@ h1 {
 }
 h2{
     color: #FFC715;
-    font-size: 95px;
+    font-size: 86px;
     margin-left: 28px;
     margin-top: 40px;
 }
@@ -30,6 +30,7 @@ p {
     font-size: 23px;
     margin-top: 30px;
     margin-left: 75px;
+    margin-bottom:30px;
     font-family: 'Raleway', sans-serif;
     
 }

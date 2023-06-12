@@ -1,5 +1,48 @@
 html {
     font-size: 14px;
+    position: relative;
+    min-height: 100%;
+    scroll-behavior: smooth;
+}
+
+.container {
+    padding: 60px 50px 30px 0px;
+}
+
+:root {
+    --primary: #ec994b;
+    --white: #ffffff;
+    --bg: #f5f5f5;
+}
+
+label {
+    display: block;
+    font: 1rem 'Fira Sans', sans-serif;
+}
+
+input,
+label {
+    margin: 0.2rem 0;
+}
+
+
+::-webkit-scrollbar {
+    width: .7rem;
+ 
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 1rem;
+    background: #797979;
+    transition: all 0.5s ease-in-out;
+}
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #222224;
+    }
+
+::-webkit-scrollbar-track {
+    background: #f9f9f9;
 }
 
 @media (min-width: 768px) {
@@ -14,7 +57,7 @@ html {
 }
 body {
     margin: 0px 0px;
-    background-color: white;
+    background-color: var(--bg);
     padding: 0;
     justify-content: space-between;
 }
