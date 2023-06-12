@@ -6,6 +6,10 @@ html {
     min-height: 100%;
     scroll-behavior: smooth;
 }
+#goback {
+    cursor: pointer;
+}
+
 
 @media (min-width: 768px) {
     html {
@@ -117,6 +121,7 @@ body {
     height: 4rem;
     width:4rem;
 }
+
 
 .blue {
     color: #2571AF;

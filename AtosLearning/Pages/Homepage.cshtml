@@ -15,6 +15,7 @@
 </head>
 <header class="min-vw-100 display-flex flex-row justify-content-between align-items-center px-5">
     <div class="my-flex-row">
+        <img id="goback" src="/images/greenarrowback.png" alt="goback" onclick="location.href='/Index'" style="height: 50px !important; width: 50px !important;margin-right:20px; margin-top:20px;" />
         <div class="my-flex-column me-1">
             <h2 class="m-0 blue d-inline-block fs-1">AtosLearning</h2>
             <h4 class="yellow d-inline-block fs-">Home page</h4>
@@ -80,8 +81,27 @@
     <div class="col-4 text-start align-items-start">
 
         <h4>Examenes pendientes</h4>
-        <button class="buscar" onclick="location.href='/resultado'">Prueba</button>
-            </div>
+    </div>
+        <div class="col-3 text-center align-content-end">
+            <button class="btn btn-secondary btn-lg dropdown-toggle" id="subject-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                @if (Model.SelectedSubject != null)
+                {
+                    @Model.SelectedSubject.Name
+                }
+                else
+                {
+                    <span>Filtrar</span>
+                }
+            </button>
+            <ul class="dropdown-menu">
+                @foreach (var subject in Model.Subjects)
+                {
+                    <li>
+                        <button class="dropdown-item" onclick="onSelectDropdown()" name="subjectId" value="@subject.ID">@subject.Name</button>
+                    </li>
+                }
+            </ul>
+        </div>
 </div>
     <section id="tranding">
         <div class="container">
@@ -96,10 +116,10 @@
                             </div>
                             <div class="tranding-slide-content">
                                 <div class="tranding-slide-content-bottom">
-                                    <h2 class="food-name">
-                                        @subject.Name
-                                    </h2>
-                                    <h3 class="food-rating">
+
+                                    <a href="/resultado"><h2 class="food-name">@subject.Name</h2></a>
+              
+                                    <h4 class="food-rating">
                                         <span>4.5</span>
                                         <div class="rating">
                                             <ion-icon name="star"></ion-icon>
@@ -108,7 +128,7 @@
                                             <ion-icon name="star"></ion-icon>
                                             <ion-icon name="star"></ion-icon>
                                         </div>
-                                    </h3>
+                                    </h4>
                                 </div>
                             </div>
                         </div>
