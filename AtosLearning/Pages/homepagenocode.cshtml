@@ -1,0 +1,88 @@
+﻿@page
+@model AtosLearning.Pages.homepagenocodeModel
+@{
+}
+
+
+<head>
+    <meta charset="utf-8" />
+    <title>Homepage</title>
+    <link href="css/homepage.css" rel="stylesheet" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/swiper@8/swiper-bundle.min.css" rel="stylesheet" />
+    <link href="css/carrusel.css" rel="stylesheet" />
+</head>
+
+<header class="min-vw-100 display-flex flex-row justify-content-between align-items-center px-5">
+    <div class="my-flex-row">
+        <div class="my-flex-column me-1">
+            <h2 class="m-0 blue d-inline-block fs-1" onclick="location.href='/Homepage'" style="cursor:pointer;">AtosLearning</h2>
+            <h4 class="yellow d-inline-block fs-">Home page</h4>
+        </div>
+        <div class="my-flex-column justify-content-center mb-1">
+            <h5 class="blue">Profesores</h5>
+        </div>
+    </div>
+    @if (@Model.CurrentUser.IsTeacher)
+    {
+        <div class="my-flex-row">
+            <div class="my-flex-column align-items-center me-2">
+                <h4>Código único</h4>
+                <h5>@Model.CurrentUser.Course.Code</h5>
+            </div>
+        </div>
+    }
+    <div class="my-flex-row">
+        <div class="my-flex-column align-items-center me-2">
+            <h4>@Model.CurrentUser.Name @Model.CurrentUser.Surname</h4>
+            <h5 data-bs-toggle="modal" data-bs-target="#ModalPerfil">Ver mi perfil</h5>
+            <div class="modal fade" id="ModalPerfil" tabindex="-1" aria-labelledby="ModaPerfilLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header display-flex justify-content-center">
+                            <h5 class="modal-title text-center d-block" id="ModalPerfilLabel">¡ Hola  @Model.CurrentUser.Name !</h5>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <p>
+                                    Los datos de tu perfil son los siguientes:
+                                    Tu nombre es @Model.CurrentUser.Name @Model.CurrentUser.Surname,
+                                    tu correo es @Model.CurrentUser.Email
+                                    y estas inscrito al curso @Model.CurrentUser.Course
+                                    @if (@Model.CurrentUser.IsTeacher)
+                                    {
+                                    <p> Tu perfil es de tipo maestro </p>
+                                    }
+                                    else
+                                    {
+                                    <p> Tu perfil es de tipo alumno </p>
+                                    }
+                                </p>
+
+                            </div>
+                            <div class="display-flex justify-content-end">
+                                <button type="button" onclick="location.href='Index'" class="btn btn-danger">Cerrar sesión</button>
+                                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Regresar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="my-flex-column align-items-center justify-content-center">
+            <img id="user-img" src="images/profile.png" alt="profile" />
+        </div>
+    </div>
+</header>
+
+<div class="col-12 align-content-center">
+    <div class="row">
+        <img id="SpriteIdle" src="~/images/spriteHurt.png" alt="idlesprite" />
+    </div>
+    <div class="row">
+        <h1>No estas inscrito a ningun curso</h1>
+    </div>
+</div>

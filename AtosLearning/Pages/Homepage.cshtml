@@ -89,7 +89,7 @@
                 }
                 else
                 {
-                    <img id="SpriteIdle" src="~/images/spriteIdle.png" alt="idlesprite"/>
+                    <img class="button-rectangle" id="SpriteIdle" src="~/images/spriteIdle.png" alt="idlesprite"/>
                 }
             </div>
         }
@@ -219,8 +219,14 @@
                             </div>
                             <div class="tranding-slide-content">
                                 <div class="tranding-slide-content-bottom" style="align-content:center;">
-
-                                    <a asp-page="/resultadoAlumno" asp-route-examid=@Exam.Id><h2 class="food-name">@Exam.Title</h2></a>
+                                    @if (@Model.CurrentUser.IsTeacher)
+                                    {
+                                        <a asp-page="/resultado" asp-route-examid=@Exam.Id><h2 class="food-name">@Exam.Title</h2></a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-page="/resultadoAlumno" asp-route-examid=@Exam.Id><h2 class="food-name">@Exam.Title</h2></a>
+                                    }
                                     <h4 class="food-rating">
                                         <p> @Exam.DueDate </p>
                                     </h4>
@@ -257,8 +263,14 @@
                             </div>
                             <div class="tranding-slide-content">
                                 <div class="tranding-slide-content-bottom">
-
-                                    <a href="/resultado"><h2 class="food-name">@Exam.Title</h2></a>
+                                    @if (@Model.CurrentUser.IsTeacher)
+                                    {
+                                        <a asp-page="/resultado" asp-route-examid=@Exam.Id><h2 class="food-name">@Exam.Title</h2></a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-page="/resultadoAlumno" asp-route-examid=@Exam.Id><h2 class="food-name">@Exam.Title</h2></a>
+                                    }
 
                                     <h4 class="food-rating">
                                         <p> @Exam.DueDate </p>
