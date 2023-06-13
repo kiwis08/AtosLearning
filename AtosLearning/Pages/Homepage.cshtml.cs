@@ -35,6 +35,8 @@ namespace AtosLearning.Pages;
 
     public async Task OnGet()
     {
+
+
         var userBytes = HttpContext.Session.Get("User");
         var user = userBytes == null ? null : JsonSerializer.Deserialize<User>(userBytes);
         CurrentTeacher = user;
