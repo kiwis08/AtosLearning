@@ -65,27 +65,27 @@
                 <h4>Materias</h4>
             </div>
 
-            <div class="col align-items-start" style="display:flex; flex-wrap:wrap; justify-content:space-around;">
+            <div class="col align-items-start" style="display:flex;flex-wrap: wrap;justify-content: center;">
                     @foreach (var subject in Model.Subjects)
                     {
+
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn nombremateria" data-bs-toggle="modal" data-bs-target="#exampleModal">@subject.Name</button>
+                    <button type="button" class="btn nombremateria" data-bs-toggle="modal" data-bs-target=@("#" + subject.Name.Substring(0,4))>@subject.Name</button>
                     <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id=@subject.Name.Substring(0,4) tabindex="-1" aria-labelledby=@subject.ID.ToString() aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                    <h5 class="modal-title" id=@subject.ID.ToString()>@subject.Name</h5>
                                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    ...
+                                    @subject.Description
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 </div>
                             </div>
                         </div>
@@ -96,7 +96,27 @@
             </div>
 
             <div class="row align-items-center" style="display:flex; justify-content:center;">
-                <button class="crearmateria" onclick="location.href='/resultado'">Crear materia</button>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn crearmateria" data-bs-toggle="modal" data-bs-target="#ModalCrear">Crear materia</button>
+                <!-- Modal -->
+                <div class="modal fade" id="ModalCrear" tabindex="-1" aria-labelledby="ModaCrearlLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="ModalCrearLabel">xxxxxxxxxxxxxxx</h5>
+                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                xxxxxxxxxxxxxxxxxxxx
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         </div>
