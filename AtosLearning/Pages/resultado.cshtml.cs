@@ -1,12 +1,79 @@
+using System.Diagnostics;
+using System.Text.Json;
+using AtosLearning.Models;
+using AtosLearningAPI.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace AtosLearning.Pages
 {
-    public class Index1Model : PageModel
+    public class ResultsModel : PageModel
     {
-        public void OnGet()
+        
+        private readonly IConfiguration _configuration;
+        
+        public ResultsModel(IConfiguration configuration)
         {
+            _configuration = configuration;
         }
+        
+        public string ExamId { get; set; } = "10";
+        public List<ExamSubmission> ExamSubmissions { get; set; } = new List<ExamSubmission>();
+        public List<QuestionStat> QuestionStats { get; set; } = new List<QuestionStat>();
+        
+        public List<User> PendingSubmissions { get; set; } = new List<User>();
+
+        public async Task OnGet()
+        {
+            ExamSubmissions = await GetExamSubmissions();
+            QuestionStats = await GetQuestionStats();
+            PendingSubmissions = await GetPendingSubmissions();
+        }
+        
+        public async Task<List<ExamSubmission>> GetExamSubmissions()
+        {
+            string connectionString = _configuration.GetConnectionString("atoslearning");
+            var url = connectionString + $"/api/ExamSubmission/exam/{ExamId}";
+
+            var client = new HttpClient();
+            var response = await client.GetAsync(url);
+            var json = await response.Content.ReadAsStringAsync();
+            var submissions = JsonSerializer.Deserialize<List<ExamSubmission>>(json, new JsonSerializerOptions()
+            {
+                PropertyNameCaseInsensitive = true
+            });
+            return submissions ?? new List<ExamSubmission>();
+        } 
+        
+        public async Task<List<QuestionStat>> GetQuestionStats()
+        {
+            string connectionString = _configuration.GetConnectionString("atoslearning");
+            var url = connectionString + $"/api/Stats/{ExamId}";
+
+            var client = new HttpClient();
+            var response = await client.GetAsync(url);
+            var json = await response.Content.ReadAsStringAsync();
+            var stats = JsonSerializer.Deserialize<List<QuestionStat>>(json, new JsonSerializerOptions()
+            {
+                PropertyNameCaseInsensitive = true
+            });
+            return stats ?? new List<QuestionStat>();
+        }
+        
+        public async Task<List<User>> GetPendingSubmissions()
+        {
+            string connectionString = _configuration.GetConnectionString("atoslearning");
+            var url = connectionString + $"/api/Stats/users/pending/{ExamId}";
+
+            var client = new HttpClient();
+            var response = await client.GetAsync(url);
+            var json = await response.Content.ReadAsStringAsync();
+            var users = JsonSerializer.Deserialize<List<User>>(json, new JsonSerializerOptions()
+            {
+                PropertyNameCaseInsensitive = true
+            });
+            return users ?? new List<User>();
+        }
+        
     }
 }

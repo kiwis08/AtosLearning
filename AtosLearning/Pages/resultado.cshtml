@@ -1,5 +1,9 @@
 ﻿@page
-@model AtosLearning.Pages.IndexModel
+@model AtosLearning.Pages.ResultsModel
+@using System.Diagnostics
+@using AtosLearning.Models
+@using AtosLearningAPI.Model
+
 @{
 }
 
@@ -32,23 +36,143 @@
         </div>
     </div>
 </header>
+
+
+
 <body>
-<div class="p-5 text-center bg-image"
+<div class="text-center w-100 h-auto py-2 mb-3 "
      style="
       background-image: url('https://lh3.googleusercontent.com/drive-viewer/AFGJ81pH_WqC0Ow1ZLtoTtccir0FflK7fAnw3TSPw76T8sVl1ALfaLZavkN6eQ8b31wvTLE9ogW94lpHwDW1ekg9D6nre7vCMw=s2560');
-      height: 200px;
-      width: 1500px;
-    ">
-    
-    <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
-        <div class="d-flex justify-content-center align-items-center h-100">
-            <div class="text-white">
-                <h1 class="mb-3">Álgebra 1</h1>
-            </div>
+     ">
+    <h1 class="mb-0 d-inline py-1 px-2 rounded"
+        style="
+            background-color: rgba(0, 0, 0, 0.5);
+        ">
+        Álgebra 1
+    </h1>
+</div>
+
+<div class="container shadow-sm mb-3">
+    <div class="row border-bottom py-1">
+        <span class="w-30 text-center fs-7 fw-bold">
+            Nombre
+        </span>
+        <span class="w-20 text-center fs-7 fw-bold">
+            Estado
+        </span>
+        <span class="w-20 text-center fs-7 fw-bold">
+            Calificación
+        </span>
+        <span class="w-30 text-center fs-7 fw-bold">
+            Fecha
+        </span>
+    </div>
+    @foreach (ExamSubmission submission in Model.ExamSubmissions)
+    {
+        <div class="row border-bottom py-1">
+            <span class="w-30 text-center fs-7">
+                @submission.UserName
+            </span>
+            <span class="w-20 text-center fs-7">
+                @(submission.Score >= 60 ? "APROBADO" : "REPROBADO")
+            </span>
+            <span class="w-20 text-center fs-7">
+                @submission.Score.ToString()
+            </span>
+            <span class="w-30 text-center fs-7">
+                @submission.Date.ToString().Substring(0, 17)
+            </span>
         </div>
+    }
+
+</div>
+
+<div class="card w-50 mx-auto">
+    <div class="card-header">
+        Errores por pregunta
+    </div>
+    <div class="card-body">
+        <canvas id="errorsChart" ></canvas>
+    </div>
+
+</div>
+
+<div class="card w-50 mx-auto">
+    <div class="card-header">
+        Examenes Completados
+    </div>
+    <div class="card-body">
+        <canvas id="pendingChart"></canvas>
     </div>
 </div>
 
+<div class="container shadow-sm mb-3">
+    <div class="row border-bottom py-1">
+        <span class="w-50 text-center fs-7 fw-bold">
+            Nombre
+        </span>
+        <span class="w-50 text-center fs-7 fw-bold">
+            Email 
+        </span>
+    </div>
+    @foreach (User user in Model.PendingSubmissions)
+    {
+        <div class="row border-bottom py-1">
+            <span class="w-50 text-center fs-7">
+                @(user.Name + " " + user.Surname)
+            </span>
+            <span class="w-50 text-center fs-7">
+                @user.Email
+            </span>
+        </div>
+    }
 
+</div>
 </body>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+<script type="text/javascript">
+    var questionStats = @Json.Serialize(Model.QuestionStats);
+    
+    var errorsChart = document.getElementById('errorsChart').getContext('2d');
+    var myerrorsChart = new Chart(errorsChart,  {
+        type: 'bar',
+        data: {
+            labels: questionStats.map(function(stat) { return stat.question; }),
+            datasets: [{
+                label: 'Respuestas incorrectas',
+                data: questionStats.map(function(stat) { return stat.incorrectAnswers; }),
+                backgroundColor: 'rgba(255, 0, 0, 0.5)'
+                }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        max: questionStats.reduce(function (max, stat) {
+                                                                            return stat.incorrectAnswers > max ? stat.incorrectAnswers : max;
+                                                                          }, -Infinity) + 1  ,
+                        stepSize: 1        
+                    }
+                }]
+            }
+        }
+        });
+    
+    
+    var pendingSubmissions = @Json.Serialize(Model.PendingSubmissions);
+    var examSubmissions = @Json.Serialize(Model.ExamSubmissions);
+
+    var pendingChart = document.getElementById('pendingChart').getContext('2d');
+    var myPendingChart = new Chart(pendingChart,  {
+        type: 'pie',
+        data: {
+            labels: ["Completados", "Pendientes"],
+            datasets: [{
+                data: [examSubmissions.length, pendingSubmissions.length],
+                backgroundColor: ['blue', "rgba(255, 0, 0, 0.5)"]
+                }]
+        }
+        });
+</script>
