@@ -103,7 +103,11 @@ namespace AtosLearning.Pages;
     public async Task<List<Subject>> GetSubjects()
     {
         string connectionString = _configuration.GetConnectionString("atoslearning");
-        var url = connectionString + $"Subjects/teacher/{CurrentUser.Id}";
+        var url = connectionString + $"Subjects/teacher/{CurrentTeacher.Id}";
+        if (CurrentTeacher.IsTeacher == false)
+        {
+            url = connectionString + $"Subjects/student/{CurrentTeacher.Id}";
+        }
 
         var client = new HttpClient();
         var response = await client.GetAsync(url);
@@ -133,5 +137,11 @@ namespace AtosLearning.Pages;
         var selectedSubjectBytes = HttpContext.Session.Get("SelectedSubject");
         var selectedSubject = selectedSubjectBytes == null ? null : JsonSerializer.Deserialize<Subject>(selectedSubjectBytes);
         SelectedSubject = selectedSubject;
+    }
+
+    public void OnPostCreateSubject(string nombreMateria, string descripcionMateria)
+    {
+        Debug.WriteLine(nombreMateria);
+        Debug.WriteLine(descripcionMateria);
     }
     }

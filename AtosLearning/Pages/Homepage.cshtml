@@ -24,12 +24,15 @@
             <h5 class="blue">Profesores</h5>
         </div>
     </div>
-    <div class="my-flex-row">
-        <div class="my-flex-column align-items-center me-2">
-            <h4>Código único</h4>
-            <h5>@Model.CurrentUser.Course.Code</h5>
+    @if (@Model.CurrentTeacher.IsTeacher)
+    {
+        <div class="my-flex-row">
+            <div class="my-flex-column align-items-center me-2">
+                <h4>Código único</h4>
+                <h5>@Model.CurrentTeacher.Course.Code</h5>
+            </div>
         </div>
-    </div>
+    }
     <div class="my-flex-row">
         <div class="my-flex-column align-items-center me-2">
             <h4>@Model.CurrentUser.Name @Model.CurrentUser.Surname</h4>
@@ -44,9 +47,12 @@
 
 <div class="principal">
     <div class="row ">
-        <div class="col-3 text-center align-content-start">
+        @if (@Model.CurrentTeacher.IsTeacher)
+        {
+            <div class="col-3 text-center align-content-start">
                 <button class="button-rectangle" onclick="location.href='/Exam'">Crear examen</button>
-        </div>
+            </div>
+        }
         <div class="col-5 align-items-start">
                  <div class="columnabuscar">
                        <div class="row">
@@ -102,14 +108,24 @@
                 <div class="modal fade" id="ModalCrear" tabindex="-1" aria-labelledby="ModaCrearlLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
-                            <div class="modal-header" style="display:flex; align-content:center;">
-                                <h5 class="modal-title" id="ModalCrearLabel">Crear materia</h5>
+                            <div class="modal-header display-flex justify-content-center">
+                                <h5 class="modal-title text-center d-block" id="ModalCrearLabel">Crear materia</h5>
                             </div>
-                            <div class="modal-body" style="display:flex; align-content:center;">
-                                xxxxxxxxxxxxxxxxxxxxa
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <div class="modal-body">
+                                <form method="post" asp-page-handler="CreateSubject">
+                                  <div class="mb-3">
+                                    <label for="nombreMateria" class="form-label">Nombre de la materia</label>
+                                    <input type="text" name="nombreMateria" class="form-control" id="nombreMateria" placeholder="Nombre">
+                                  </div>
+                                    <div class="mb-3">
+                                        <label for="descripcionMateria" class="form-label">Descripción</label>
+                                        <textarea type="textarea" name="descripcionMateria" class="form-control" id="descripcionMateria" style="height: 120px" placeholder="Descripción"> </textarea>
+                                    </div>
+                                    <div class="display-flex justify-content-end">
+                                        <button type="submit" class="btn btn-success">Submit</button>
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -150,7 +166,7 @@
 </div>
     <section id="tranding">
         <div class="container">
-            <div class="swiper tranding-slider">
+            <div class="swiper tranding-slider overflow-visible">
                 <div class="swiper-wrapper">
                     <!-- Slide-start -->
                     @foreach (var Exam in Model.ActiveExams)
@@ -171,7 +187,7 @@
                     }
                 </div>
 
-                <div class="tranding-slider-control">
+                <div class="tranding-slider-control mt-4">
                     <div class="swiper-button-prev slider-arrow">
                         <ion-icon name="arrow-back-outline"></ion-icon>
                     </div>
@@ -187,7 +203,7 @@
     <h4>Examenes anteriores</h4>
     <section id="tranding">
         <div class="container">
-            <div class="swiper tranding-slider">
+            <div class="swiper tranding-slider overflow-visible">
                 <div class="swiper-wrapper">
                     <!-- Slide-start -->
                     @foreach (var Exam in Model.ClosedExams)
@@ -211,7 +227,7 @@
                     <!-- Slide-end -->
                 </div>
 
-                <div class="tranding-slider-control">
+                <div class="tranding-slider-control mt-4">
                     <div class="swiper-button-prev slider-arrow">
                         <ion-icon name="arrow-back-outline"></ion-icon>
                     </div>

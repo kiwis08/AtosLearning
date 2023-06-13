@@ -22,9 +22,14 @@ namespace AtosLearning.Pages
         public List<QuestionStat> QuestionStats { get; set; } = new List<QuestionStat>();
         
         public List<User> PendingSubmissions { get; set; } = new List<User>();
+        
+        public User CurrentTeacher { get; set; }
 
         public async Task OnGet()
         {
+            var userBytes = HttpContext.Session.Get("User");
+            var user = userBytes == null ? null : JsonSerializer.Deserialize<User>(userBytes);
+            CurrentTeacher = user;
             ExamSubmissions = await GetExamSubmissions();
             QuestionStats = await GetQuestionStats();
             PendingSubmissions = await GetPendingSubmissions();
