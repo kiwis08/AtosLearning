@@ -17,7 +17,7 @@ namespace AtosLearning.Pages
             _configuration = configuration;
         }
         
-        public string ExamId { get; set; } = "10";
+        public string ExamId { get; set; }
         public List<ExamSubmission> ExamSubmissions { get; set; } = new List<ExamSubmission>();
         public List<QuestionStat> QuestionStats { get; set; } = new List<QuestionStat>();
         
@@ -25,8 +25,9 @@ namespace AtosLearning.Pages
         
         public User CurrentTeacher { get; set; }
 
-        public async Task OnGet()
+        public async Task OnGet(string examId)
         {
+            ExamId = examId;
             var userBytes = HttpContext.Session.Get("User");
             var user = userBytes == null ? null : JsonSerializer.Deserialize<User>(userBytes);
             CurrentTeacher = user;

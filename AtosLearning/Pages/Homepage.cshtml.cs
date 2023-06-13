@@ -21,10 +21,18 @@ namespace AtosLearning.Pages;
     public IList<Exam> Exams { get; set; } = new List<Exam>();
     public IList<Exam> ActiveExams { get; set; } = new List<Exam>();
     public IList<Exam> ClosedExams { get; set; } = new List<Exam>();
-    public User CurrentUser;
+    
+    [BindProperty]
+    public User CurrentUser { get; set; }
     [BindProperty]
 
     public Subject? SelectedSubject { get; set; }
+    
+    [BindProperty]
+    public string NewSubjectName { get; set; }
+    
+    [BindProperty]
+    public string NewSubjectDescription { get; set; }
 
 
     public HomepageModel(IConfiguration configuration)
@@ -43,23 +51,11 @@ namespace AtosLearning.Pages;
         
         ActiveExams = await GetActiveExams();
         ClosedExams = await GetInactiveExams();
-        // Get the list of subjects from session state
-        var subjectBytes = HttpContext.Session.Get("Subjects");
-        var subjects = subjectBytes == null ? null : JsonSerializer.Deserialize<List<Subject>>(subjectBytes);
 
-        // If the list is null (i.e. this is the first time the page has been loaded),
-        // create a new list and add it to session state
-        if (subjects == null)
-        {
-            subjects = await GetSubjects();
-            var bytes = JsonSerializer.SerializeToUtf8Bytes(subjects);
-            HttpContext.Session.Set("Subjects", bytes);
-        }
         
         
 
-        // Set the list of subjects as a property on the model so it can be used in the view
-        Subjects = subjects;
+        Subjects = await GetSubjects();
 
     }
 
@@ -103,10 +99,10 @@ namespace AtosLearning.Pages;
     public async Task<List<Subject>> GetSubjects()
     {
         string connectionString = _configuration.GetConnectionString("atoslearning");
-        var url = connectionString + $"Subjects/teacher/{CurrentTeacher.Id}";
-        if (CurrentTeacher.IsTeacher == false)
+        var url = connectionString + $"Subjects/teacher/{CurrentUser.Id}";
+        if (CurrentUser.IsTeacher == false)
         {
-            url = connectionString + $"Subjects/student/{CurrentTeacher.Id}";
+            url = connectionString + $"Subjects/student/{CurrentUser.Id}";
         }
 
         var client = new HttpClient();
@@ -139,9 +135,25 @@ namespace AtosLearning.Pages;
         SelectedSubject = selectedSubject;
     }
 
-    public void OnPostCreateSubject(string nombreMateria, string descripcionMateria)
+    public async Task<IActionResult> OnPostCreateSubject()
     {
-        Debug.WriteLine(nombreMateria);
-        Debug.WriteLine(descripcionMateria);
+        string connectionString = _configuration.GetConnectionString("atoslearning");
+        var url = connectionString + $"Subjects";
+        
+        var teacherBytes = HttpContext.Session.Get("User");
+        var teacher = teacherBytes == null ? null : JsonSerializer.Deserialize<User>(teacherBytes);
+
+        var client = new HttpClient();
+        var response = await client.PostAsync(url, 
+            new StringContent(JsonSerializer.Serialize(
+                new Subject()
+                {
+                    Name = NewSubjectName, 
+                    Description = NewSubjectDescription,
+                    CourseId = teacher.Course.Id
+                }), Encoding.UTF8, "application/json"));
+        var json = await response.Content.ReadAsStringAsync();
+        var success = JsonSerializer.Deserialize<bool>(json, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+        return Redirect("/Homepage");
     }
     }

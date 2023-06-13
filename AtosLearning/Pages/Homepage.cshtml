@@ -24,12 +24,12 @@
             <h5 class="blue">Profesores</h5>
         </div>
     </div>
-    @if (@Model.CurrentTeacher.IsTeacher)
+    @if (@Model.CurrentUser.IsTeacher)
     {
         <div class="my-flex-row">
             <div class="my-flex-column align-items-center me-2">
                 <h4>Código único</h4>
-                <h5>@Model.CurrentTeacher.Course.Code</h5>
+                <h5>@Model.CurrentUser.Course.Code</h5>
             </div>
         </div>
     }
@@ -47,7 +47,7 @@
 
 <div class="principal">
     <div class="row ">
-        @if (@Model.CurrentTeacher.IsTeacher)
+        @if (@Model.CurrentUser.IsTeacher)
         {
             <div class="col-3 text-center align-content-start">
                 <button class="button-rectangle" onclick="location.href='/Exam'">Crear examen</button>
@@ -115,11 +115,11 @@
                                 <form method="post" asp-page-handler="CreateSubject">
                                   <div class="mb-3">
                                     <label for="nombreMateria" class="form-label">Nombre de la materia</label>
-                                    <input type="text" name="nombreMateria" class="form-control" id="nombreMateria" placeholder="Nombre">
+                                    <input type="text" asp-for="@Model.NewSubjectName" class="form-control" id="nombreMateria" placeholder="Nombre">
                                   </div>
                                     <div class="mb-3">
                                         <label for="descripcionMateria" class="form-label">Descripción</label>
-                                        <textarea type="textarea" name="descripcionMateria" class="form-control" id="descripcionMateria" style="height: 120px" placeholder="Descripción"> </textarea>
+                                        <textarea type="textarea" asp-for="@Model.NewSubjectDescription" class="form-control" id="descripcionMateria" style="height: 120px" placeholder="Descripción"> </textarea>
                                     </div>
                                     <div class="display-flex justify-content-end">
                                         <button type="submit" class="btn btn-success">Submit</button>
@@ -177,7 +177,8 @@
                             </div>
                             <div class="tranding-slide-content">
                                 <div class="tranding-slide-content-bottom" style="align-content:center;">
-                                    <a href="/resultado"><h2 class="food-name">@Exam.Title</h2></a>
+
+                                    <a asp-page="/resultado" asp-route-examid=@Exam.Id><h2 class="food-name">@Exam.Title</h2></a>
                                     <h4 class="food-rating">
                                         <p> @Exam.DueDate </p>
                                     </h4>
