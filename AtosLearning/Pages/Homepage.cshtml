@@ -17,7 +17,7 @@
 <header class="min-vw-100 display-flex flex-row justify-content-between align-items-center px-5">
     <div class="my-flex-row">
         <div class="my-flex-column me-1">
-            <h2 class="m-0 blue d-inline-block fs-1">AtosLearning</h2>
+            <h2 class="m-0 blue d-inline-block fs-1" onclick="location.href='/Homepage'" style="cursor:pointer;">AtosLearning</h2>
             <h4 class="yellow d-inline-block fs-">Home page</h4>
         </div>
         <div class="my-flex-column justify-content-center mb-1">
@@ -163,7 +163,10 @@
                                 <div class="tranding-slide-content-bottom" style="align-content:center;">
 
                                     <a href="/resultado"><h2 class="food-name">@Exam.Title</h2></a>
-                                   
+
+                                    <h4 class="food-rating">
+                                        <p> @Exam.DueDate </p>
+                                    </h4>
                                 </div>
                             </div>
                         </div>
@@ -201,14 +204,7 @@
                                     <a href="/resultado"><h2 class="food-name">@Exam.Title</h2></a>
 
                                     <h4 class="food-rating">
-                                        <span>4.5</span>
-                                        <div class="rating">
-                                            <ion-icon name="star"></ion-icon>
-                                            <ion-icon name="star"></ion-icon>
-                                            <ion-icon name="star"></ion-icon>
-                                            <ion-icon name="star"></ion-icon>
-                                            <ion-icon name="star"></ion-icon>
-                                        </div>
+                                        <p> @Exam.DueDate </p>
                                     </h4>
                                 </div>
                             </div>
