@@ -83,15 +83,16 @@
         @if (@Model.CurrentUser.IsTeacher)
         {
             <div class="col-3 text-center align-content-start">
-            @if (@Model.CurrentUser.IsTeacher)
-            {
-                <button class="button-rectangle" onclick="location.href='/Exam'">Crear examen</button>
-            }
-            else{
-                <img id="SpriteIdle" src="~/images/spriteIdle.png" alt="idlesprite"/>
-            }
+                @if (@Model.CurrentUser.IsTeacher)
+                {
+                    <button class="button-rectangle" onclick="location.href='/Exam'">Crear examen</button>
+                }
+                else
+                {
+                    <img id="SpriteIdle" src="~/images/spriteIdle.png" alt="idlesprite"/>
+                }
             </div>
-        
+        }
         <div class="col-5 align-items-start">
                  <div class="columnabuscar">
                        <div class="row">
@@ -141,30 +142,6 @@
             </div>
 
             <div class="row align-items-center" style="display:flex; justify-content:center;">
-                <!-- Button trigger modal -->
-                <button type="button" class="btn crearmateria" data-bs-toggle="modal" data-bs-target="#ModalCrear">Crear materia</button>
-                <!-- Modal -->
-                <div class="modal fade" id="ModalCrear" tabindex="-1" aria-labelledby="ModaCrearlLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header display-flex justify-content-center">
-                                <h5 class="modal-title text-center d-block" id="ModalCrearLabel">Crear materia</h5>
-                            </div>
-                            <div class="modal-body">
-                                <form method="post" asp-page-handler="CreateSubject">
-                                  <div class="mb-3">
-                                    <label for="nombreMateria" class="form-label">Nombre de la materia</label>
-                                    <input type="text" asp-for="@Model.NewSubjectName" class="form-control" id="nombreMateria" placeholder="Nombre">
-                                  </div>
-                                    <div class="mb-3">
-                                        <label for="descripcionMateria" class="form-label">Descripción</label>
-                                        <textarea type="textarea" asp-for="@Model.NewSubjectDescription" class="form-control" id="descripcionMateria" style="height: 120px" placeholder="Descripción"> </textarea>
-                                    </div>
-                                    <div class="display-flex justify-content-end">
-                                        <button type="submit" class="btn btn-success">Submit</button>
-                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                    </div>
-                                </form>
                 @if (@Model.CurrentUser.IsTeacher)
                 {
                     <button type="button" class="btn crearmateria" data-bs-toggle="modal" data-bs-target="#ModalCrear">Crear materia</button>
