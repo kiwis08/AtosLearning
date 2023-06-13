@@ -24,12 +24,15 @@
             <h5 class="blue">Profesores</h5>
         </div>
     </div>
-    <div class="my-flex-row">
-        <div class="my-flex-column align-items-center me-2">
-            <h4>Código único</h4>
-            <h5>@Model.CurrentTeacher.Course.Code</h5>
+    @if (@Model.CurrentTeacher.IsTeacher)
+    {
+        <div class="my-flex-row">
+            <div class="my-flex-column align-items-center me-2">
+                <h4>Código único</h4>
+                <h5>@Model.CurrentTeacher.Course.Code</h5>
+            </div>
         </div>
-    </div>
+    }
     <div class="my-flex-row">
         <div class="my-flex-column align-items-center me-2">
             <h4>@Model.CurrentTeacher.Name @Model.CurrentTeacher.Surname</h4>
