@@ -21,4 +21,9 @@ public class Subject
         TeacherId = teacherId;
         CourseId = courseId;
     }
+    
+    public Subject()
+    {
+        
+    }
 }

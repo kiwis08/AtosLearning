@@ -8,4 +8,6 @@ public class Exam
     public string Description { get; set; }
     public DateTime DueDate { get; set; }
     public string ImageUrl { get; set; }
+    public Question[] Questions { get; set; }
+    
 }
