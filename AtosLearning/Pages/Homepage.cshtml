@@ -47,9 +47,12 @@
 
 <div class="principal">
     <div class="row ">
-        <div class="col-3 text-center align-content-start">
+        @if (@Model.CurrentTeacher.IsTeacher)
+        {
+            <div class="col-3 text-center align-content-start">
                 <button class="button-rectangle" onclick="location.href='/Exam'">Crear examen</button>
-        </div>
+            </div>
+        }
         <div class="col-5 align-items-start">
                  <div class="columnabuscar">
                        <div class="row">
