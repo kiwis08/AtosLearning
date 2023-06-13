@@ -104,6 +104,10 @@ namespace AtosLearning.Pages;
     {
         string connectionString = _configuration.GetConnectionString("atoslearning");
         var url = connectionString + $"Subjects/teacher/{CurrentTeacher.Id}";
+        if (CurrentTeacher.IsTeacher == false)
+        {
+            url = connectionString + $"Subjects/student/{CurrentTeacher.Id}";
+        }
 
         var client = new HttpClient();
         var response = await client.GetAsync(url);
