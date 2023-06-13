@@ -166,7 +166,7 @@
 </div>
     <section id="tranding">
         <div class="container">
-            <div class="swiper tranding-slider">
+            <div class="swiper tranding-slider overflow-visible">
                 <div class="swiper-wrapper">
                     <!-- Slide-start -->
                     @foreach (var Exam in Model.ActiveExams)
@@ -188,7 +188,7 @@
                     }
                 </div>
 
-                <div class="tranding-slider-control">
+                <div class="tranding-slider-control mt-4">
                     <div class="swiper-button-prev slider-arrow">
                         <ion-icon name="arrow-back-outline"></ion-icon>
                     </div>
@@ -204,7 +204,7 @@
     <h4>Examenes anteriores</h4>
     <section id="tranding">
         <div class="container">
-            <div class="swiper tranding-slider">
+            <div class="swiper tranding-slider overflow-visible">
                 <div class="swiper-wrapper">
                     <!-- Slide-start -->
                     @foreach (var Exam in Model.ClosedExams)
@@ -228,7 +228,7 @@
                     <!-- Slide-end -->
                 </div>
 
-                <div class="tranding-slider-control">
+                <div class="tranding-slider-control mt-4">
                     <div class="swiper-button-prev slider-arrow">
                         <ion-icon name="arrow-back-outline"></ion-icon>
                     </div>
