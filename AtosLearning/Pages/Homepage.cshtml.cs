@@ -21,7 +21,7 @@ namespace AtosLearning.Pages;
     public IList<Exam> Exams { get; set; } = new List<Exam>();
     public IList<Exam> ActiveExams { get; set; } = new List<Exam>();
     public IList<Exam> ClosedExams { get; set; } = new List<Exam>();
-    public User CurrentTeacher;
+    public User CurrentUser;
     [BindProperty]
 
     public Subject? SelectedSubject { get; set; }
@@ -39,7 +39,7 @@ namespace AtosLearning.Pages;
 
         var userBytes = HttpContext.Session.Get("User");
         var user = userBytes == null ? null : JsonSerializer.Deserialize<User>(userBytes);
-        CurrentTeacher = user;
+        CurrentUser = user;
         
         ActiveExams = await GetActiveExams();
         ClosedExams = await GetInactiveExams();
@@ -66,7 +66,7 @@ namespace AtosLearning.Pages;
     private async Task<IList<Exam>> GetExams()
     {
         string connectionString = _configuration.GetConnectionString("atoslearning");
-        var url = connectionString + $"api/Exams/course/{CurrentTeacher.Course.Id}";
+        var url = connectionString + $"api/Exams/course/{CurrentUser.Course.Id}";
 
         var client = new HttpClient();
         var response = await client.GetAsync(url);
@@ -78,7 +78,7 @@ namespace AtosLearning.Pages;
     private async Task<IList<Exam>> GetActiveExams()
     {
         string connectionString = _configuration.GetConnectionString("atoslearning");
-        var url = connectionString + $"api/Exams/active/{CurrentTeacher.Course.Id}";
+        var url = connectionString + $"api/Exams/active/{CurrentUser.Course.Id}";
 
         var client = new HttpClient();
         var response = await client.GetAsync(url);
@@ -90,7 +90,7 @@ namespace AtosLearning.Pages;
     private async Task<IList<Exam>> GetInactiveExams()
     {
         string connectionString = _configuration.GetConnectionString("atoslearning");
-        var url = connectionString + $"api/Exams/inactive/{CurrentTeacher.Course.Id}";
+        var url = connectionString + $"api/Exams/inactive/{CurrentUser.Course.Id}";
 
         var client = new HttpClient();
         var response = await client.GetAsync(url);
@@ -103,7 +103,7 @@ namespace AtosLearning.Pages;
     public async Task<List<Subject>> GetSubjects()
     {
         string connectionString = _configuration.GetConnectionString("atoslearning");
-        var url = connectionString + $"Subjects/teacher/{CurrentTeacher.Id}";
+        var url = connectionString + $"Subjects/teacher/{CurrentUser.Id}";
 
         var client = new HttpClient();
         var response = await client.GetAsync(url);

@@ -14,7 +14,7 @@ public class ExamModel : PageModel
     private readonly IConfiguration _configuration;
     
     public IList<Subject> Subjects { get; set; } = new List<Subject>();
-    public User CurrentTeacher;
+    public User CurrentUser;
     [BindProperty]
     public string ExamTitle { get; set; }
     [BindProperty]
@@ -42,7 +42,7 @@ public class ExamModel : PageModel
         // Get teacher from session state
         var userBytes = HttpContext.Session.Get("User");
         var user = userBytes == null ? null : JsonSerializer.Deserialize<User>(userBytes);
-        CurrentTeacher = user;
+        CurrentUser = user;
 
         // Get the list of subjects from session state
         var subjectBytes = HttpContext.Session.Get("Subjects"); 
@@ -110,7 +110,7 @@ public class ExamModel : PageModel
     public async Task<List<Subject>> GetSubjects()
     {
         string connectionString = _configuration.GetConnectionString("atoslearning");
-        var url = connectionString + $"Subjects/teacher/{CurrentTeacher.Id}";
+        var url = connectionString + $"Subjects/teacher/{CurrentUser.Id}";
         
         var client = new HttpClient();
         var response = await client.GetAsync(url);

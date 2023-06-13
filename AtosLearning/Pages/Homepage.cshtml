@@ -26,12 +26,12 @@
     <div class="my-flex-row">
         <div class="my-flex-column align-items-center me-2">
             <h4>Código único</h4>
-            <h5>@Model.CurrentTeacher.Course.Code</h5>
+            <h5>@Model.CurrentUser.Course.Code</h5>
         </div>
     </div>
     <div class="my-flex-row">
         <div class="my-flex-column align-items-center me-2">
-            <h4>@Model.CurrentTeacher.Name @Model.CurrentTeacher.Surname</h4>
+            <h4>@Model.CurrentUser.Name @Model.CurrentUser.Surname</h4>
             <h5>Ver mi perfil</h5>
         </div>
         <div class="my-flex-column align-items-center justify-content-center">
@@ -160,9 +160,7 @@
                             </div>
                             <div class="tranding-slide-content">
                                 <div class="tranding-slide-content-bottom" style="align-content:center;">
-
                                     <a href="/resultado"><h2 class="food-name">@Exam.Title</h2></a>
-
                                     <h4 class="food-rating">
                                         <p> @Exam.DueDate </p>
                                     </h4>
