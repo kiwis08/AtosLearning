@@ -36,7 +36,40 @@
     <div class="my-flex-row">
         <div class="my-flex-column align-items-center me-2">
             <h4>@Model.CurrentUser.Name @Model.CurrentUser.Surname</h4>
-            <h5>Ver mi perfil</h5>
+            <h5 data-bs-toggle="modal" data-bs-target="#ModalPerfil">Ver mi perfil</h5>
+            <div class="modal fade" id="ModalPerfil" tabindex="-1" aria-labelledby="ModaPerfilLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header display-flex justify-content-center">
+                            <h5 class="modal-title text-center d-block" id="ModalPerfilLabel">¡ Hola  @Model.CurrentUser.Name !</h5>
+                        </div>
+                        <div class="modal-body">
+                                <div class="mb-3">
+                                    <p> Los datos de tu perfil son los siguientes:
+                                        Tu nombre es @Model.CurrentUser.Name @Model.CurrentUser.Surname, 
+                                        tu correo es @Model.CurrentUser.Email 
+                                        y estas inscrito al curso @Model.CurrentUser.Course
+                                    @if (@Model.CurrentUser.IsTeacher)
+                                    {
+                                        <p> Tu perfil es de tipo maestro </p>
+                                    }
+                                    else
+                                    {
+                                    <p> Tu perfil es de tipo alumno </p>
+                                    }
+                                    </p>
+
+                                </div>
+                                <div class="display-flex justify-content-end">
+                                    <button type="button"  onclick="location.href='Index'" class="btn btn-danger">Cerrar sesión</button>
+                                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">Regresar</button>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
         <div class="my-flex-column align-items-center justify-content-center">
             <img id="user-img" src="images/profile.png" alt="profile"/>
@@ -50,9 +83,15 @@
         @if (@Model.CurrentUser.IsTeacher)
         {
             <div class="col-3 text-center align-content-start">
+            @if (@Model.CurrentUser.IsTeacher)
+            {
                 <button class="button-rectangle" onclick="location.href='/Exam'">Crear examen</button>
+            }
+            else{
+                <img id="SpriteIdle" src="~/images/spriteIdle.png" alt="idlesprite"/>
+            }
             </div>
-        }
+        
         <div class="col-5 align-items-start">
                  <div class="columnabuscar">
                        <div class="row">
@@ -79,7 +118,7 @@
                     <button type="button" class="btn nombremateria" data-bs-toggle="modal" data-bs-target=@("#" + subject.Name.Substring(0,4))>@subject.Name</button>
                     <!-- Modal -->
                     <div class="modal fade" id=@subject.Name.Substring(0,4) tabindex="-1" aria-labelledby=@subject.ID.ToString() aria-hidden="true">
-                        <div class="modal-dialog" role="document">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id=@subject.ID.ToString()>@subject.Name</h5>
@@ -126,10 +165,36 @@
                                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                                     </div>
                                 </form>
+                @if (@Model.CurrentUser.IsTeacher)
+                {
+                    <button type="button" class="btn crearmateria" data-bs-toggle="modal" data-bs-target="#ModalCrear">Crear materia</button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="ModalCrear" tabindex="-1" aria-labelledby="ModaCrearlLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header display-flex justify-content-center">
+                                    <h5 class="modal-title text-center d-block" id="ModalCrearLabel">Crear materia</h5>
+                                </div>
+                                <div class="modal-body">
+                                    <form method="post" asp-page-handler="CreateSubject">
+                                        <div class="mb-3">
+                                            <label for="nombreMateria" class="form-label">Nombre de la materia</label>
+                                            <input type="text" name="nombreMateria" class="form-control" id="nombreMateria" placeholder="Nombre">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="descripcionMateria" class="form-label">Descripción</label>
+                                            <textarea type="textarea" name="descripcionMateria" class="form-control" id="descripcionMateria" style="height: 120px" placeholder="Descripción"> </textarea>
+                                        </div>
+                                        <div class="display-flex justify-content-end">
+                                            <button type="submit" class="btn btn-success">Submit</button>
+                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                }
             </div>
         </div>
         </div>

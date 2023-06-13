@@ -59,7 +59,7 @@ header {
 }
 
 body {
-    margin: 0px 0px;
+    margin: 0px 0px 50px 0px;
     background-color: white;
     padding: 0;
     justify-content: space-between;
@@ -150,6 +150,11 @@ body {
     width:4rem;
 }
 
+#SpriteIdle {
+    height: 20rem;
+    width: 20rem;
+}
+
 
 .blue {
     color: #2571AF;
@@ -221,8 +226,9 @@ h2 {
     line-height: 38px;
 }
 
-.p{
-    font-size:30px;
+p{
+    font-size:15px;
+    color:black;
 }
 
 *,
