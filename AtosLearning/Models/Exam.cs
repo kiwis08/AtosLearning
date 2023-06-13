@@ -2,10 +2,10 @@ namespace AtosLearning.Models;
 
 public class Exam
 {
-    public int ID { get; set; }
-    public string Name { get; set; }
-    public int SubjectID { get; set; }
+    public int Id { get; set; }
+    public string Title { get; set; }
+    public int SubjectId { get; set; }
     public string Description { get; set; }
-    public Question[] Questions { get; set; }
-    public DateTime DueDateTime { get; set; }
+    public DateTime DueDate { get; set; }
+    public string ImageUrl { get; set; }
 }

@@ -18,6 +18,9 @@ namespace AtosLearning.Pages;
     private readonly IConfiguration _configuration;
 
     public IList<Subject> Subjects { get; set; } = new List<Subject>();
+    public IList<Exam> Exams { get; set; } = new List<Exam>();
+    public IList<Exam> ActiveExams { get; set; } = new List<Exam>();
+    public IList<Exam> ClosedExams { get; set; } = new List<Exam>();
     public User CurrentTeacher;
     [BindProperty]
 
@@ -35,6 +38,9 @@ namespace AtosLearning.Pages;
         var userBytes = HttpContext.Session.Get("User");
         var user = userBytes == null ? null : JsonSerializer.Deserialize<User>(userBytes);
         CurrentTeacher = user;
+        
+        ActiveExams = await GetActiveExams();
+        ClosedExams = await GetInactiveExams();
         // Get the list of subjects from session state
         var subjectBytes = HttpContext.Session.Get("Subjects");
         var subjects = subjectBytes == null ? null : JsonSerializer.Deserialize<List<Subject>>(subjectBytes);
@@ -47,10 +53,48 @@ namespace AtosLearning.Pages;
             var bytes = JsonSerializer.SerializeToUtf8Bytes(subjects);
             HttpContext.Session.Set("Subjects", bytes);
         }
+        
+        
 
         // Set the list of subjects as a property on the model so it can be used in the view
         Subjects = subjects;
 
+    }
+
+    private async Task<IList<Exam>> GetExams()
+    {
+        string connectionString = _configuration.GetConnectionString("atoslearning");
+        var url = connectionString + $"api/Exams/course/{CurrentTeacher.Course.Id}";
+
+        var client = new HttpClient();
+        var response = await client.GetAsync(url);
+        var json = await response.Content.ReadAsStringAsync();
+        var exams = JsonSerializer.Deserialize<List<Exam>>(json, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+        return exams ?? new List<Exam>();
+    }
+    
+    private async Task<IList<Exam>> GetActiveExams()
+    {
+        string connectionString = _configuration.GetConnectionString("atoslearning");
+        var url = connectionString + $"api/Exams/active/{CurrentTeacher.Course.Id}";
+
+        var client = new HttpClient();
+        var response = await client.GetAsync(url);
+        var json = await response.Content.ReadAsStringAsync();
+        var exams = JsonSerializer.Deserialize<List<Exam>>(json, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+        return exams ?? new List<Exam>();
+    }
+    
+    private async Task<IList<Exam>> GetInactiveExams()
+    {
+        string connectionString = _configuration.GetConnectionString("atoslearning");
+        var url = connectionString + $"api/Exams/inactive/{CurrentTeacher.Course.Id}";
+
+        var client = new HttpClient();
+        var response = await client.GetAsync(url);
+        var json = await response.Content.ReadAsStringAsync();
+        var exams = JsonSerializer.Deserialize<List<Exam>>(json, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+        return exams ?? new List<Exam>();
     }
 
 
@@ -62,7 +106,7 @@ namespace AtosLearning.Pages;
         var client = new HttpClient();
         var response = await client.GetAsync(url);
         var json = await response.Content.ReadAsStringAsync();
-        var subjects = JsonSerializer.Deserialize<List<Subject>>(json);
+        var subjects = JsonSerializer.Deserialize<List<Subject>>(json, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
         return subjects ?? new List<Subject>();
     }
 
