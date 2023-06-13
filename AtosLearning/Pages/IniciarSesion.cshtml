@@ -19,16 +19,16 @@
    </div>
 
 
-<div class="rectangle mx-auto">
-    <p class="crear-cuenta">Ingresar</p>
-    <form id="loginForm" method="post" asp-page="/IniciarSesion">
-        <input type="email" placeholder="Correo" name="Email" />
-        <input type="password" placeholder="Contraseña" name="Password" id="passwordField"/>
+<div class="rectangle mx-auto px-0">
+    <p class="crear-cuenta mx-0 text-center mt-2">Ingresar</p>
+    <form id="loginForm" method="post" asp-page="/IniciarSesion" class="d-flex flex-column align-items-center">
+        <input type="email" placeholder="Correo" name="Email" class="mx-auto w-50"/>
+        <input type="password" placeholder="Contraseña" name="Password" id="passwordField" class="mx-auto w-50"/>
 
         <div class="button-container">
-            <button id="signIn" type="button" class="green-button" onclick="submitForm()">Ingresar</button>
+            <button id="signIn" type="button" class="green-button mx-0" onclick="submitForm()">Ingresar</button>
 
-            <button type="button" onclick="location.href='/CrearCuenta'">Crear una Cuenta</button>
+            <button type="button" class="mx-0" onclick="location.href='/CrearCuenta'">Crear una Cuenta</button>
         </div>
     </form>
 </div>
