@@ -134,4 +134,10 @@ namespace AtosLearning.Pages;
         var selectedSubject = selectedSubjectBytes == null ? null : JsonSerializer.Deserialize<Subject>(selectedSubjectBytes);
         SelectedSubject = selectedSubject;
     }
+
+    public void OnPostCreateSubject(string nombreMateria, string descripcionMateria)
+    {
+        Debug.WriteLine(nombreMateria);
+        Debug.WriteLine(descripcionMateria);
+    }
     }

@@ -102,14 +102,24 @@
                 <div class="modal fade" id="ModalCrear" tabindex="-1" aria-labelledby="ModaCrearlLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
-                            <div class="modal-header" style="display:flex; align-content:center;">
-                                <h5 class="modal-title" id="ModalCrearLabel">Crear materia</h5>
+                            <div class="modal-header display-flex justify-content-center">
+                                <h5 class="modal-title text-center d-block" id="ModalCrearLabel">Crear materia</h5>
                             </div>
-                            <div class="modal-body" style="display:flex; align-content:center;">
-                                xxxxxxxxxxxxxxxxxxxxa
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <div class="modal-body">
+                                <form method="post" asp-page-handler="CreateSubject">
+                                  <div class="mb-3">
+                                    <label for="nombreMateria" class="form-label">Nombre de la materia</label>
+                                    <input type="text" name="nombreMateria" class="form-control" id="nombreMateria" placeholder="Nombre">
+                                  </div>
+                                    <div class="mb-3">
+                                        <label for="descripcionMateria" class="form-label">Descripción</label>
+                                        <textarea type="textarea" name="descripcionMateria" class="form-control" id="descripcionMateria" style="height: 120px" placeholder="Descripción"> </textarea>
+                                    </div>
+                                    <div class="display-flex justify-content-end">
+                                        <button type="submit" class="btn btn-success">Submit</button>
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
