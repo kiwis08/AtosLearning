@@ -63,7 +63,7 @@ namespace AtosLearning.Pages
             {
                 return RedirectToPage("/homepagenocode");
             }
-            if (user.IsTeacher)
+            if (user != null)
             {
                 return RedirectToPage("/Homepage");
             }
