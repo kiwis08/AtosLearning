@@ -1,7 +1,16 @@
+using System.Text.Json.Serialization;
+
 namespace AtosLearning.Models;
 
 public class Answer
 {
-    public string Id { get; set; }
+    [JsonPropertyName("id")] public int Id { get; set; }
+    
+    [JsonPropertyName("text")]
     public string Title { get; set; }
+    
+    public int QuestionId { get; set; }
+    
+    [JsonPropertyName("isCorrect")]
+    public bool IsCorrect { get; set; }
 }

@@ -43,21 +43,18 @@
             <div class="col">
                 <input asp-for="@Model.CurrentExam.Title" class="form-control exam-field" id="exam-title" placeholder="Nombre del examen">
                 <input asp-for="@Model.CurrentExam.Description" class="form-control exam-field" id="exam-description" placeholder="Descripción">
-                <input class="form-control" placeholder="Temario">
             </div>
             <div class="col">
                 <label for="start">Fecha límite:</label><br/>
-                <input type="date" id="start" name="trip-start"
-                       value="2023-06-12"
-                       min="2023-06-12" max="2023-12-31">
+                <input asp-for="@Model.CurrentExam.DueDate">
                 <input type="hidden" name="ExamTitle" id="hidden-exam-title" value="@Model.CurrentExam.Title"/>
                 <input type="hidden" name="ExamDescription" id="hidden-exam-description" value="@Model.CurrentExam.Description"/>
-                <select asp-for="@Model.SelectedSubject" class="dropdown-toggle btn-lg">
+                <select asp-for="@Model.SelectedSubjectId" class="dropdown-toggle btn-lg">
                     <option value="">Selecciona una materia</option>
                     <ul class="dropdown-menu">
-                        @for (int i = 0; i < @Model.Subjects.Count; i++)
+                        @for (int i = 0; i < @Model.Subjects.Count(); i++)
                         {
-                            <option class="dropdown-item" value="@Model.Subjects[i]">@Model.Subjects[i].Name</option>
+                            <option class="dropdown-item" value="@Model.Subjects.ElementAt(i).ID">@Model.Subjects.ElementAt(i).Name</option>
                         }
                     </ul>
                 </select>
@@ -101,21 +98,26 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <select asp-for="CorrectAnswerIndex" class="dropdown-toggle btn-lg">
+                        <select asp-for="@Model.CurrentExam.Questions[@Model.CurrentQuestionIndex].CorrectAnswerIndex" class="dropdown-toggle btn-lg">
                             <option value="">Respuesta correcta</option>
                             <ul class="dropdown-menu">
-                                @for (int i = 1; i < 5; i++)
+                                @for (int i = 0; i < 4; i++)
                                 {
-                                    <option class="dropdown-item" value="@i">@i</option>
+                                    int option = i + 1;
+                                    <option class="dropdown-item" value="@i">@option</option>
                                 }
                             </ul>
                         </select>
-                        <button class="btn rounded-button" type="submit" style="border-bottom-width: 2px; width: 30%; height: 50px; border-radius: 24px; border-color: blue">Guardar Pregunta</button>
                     </div>
                 </div>
             </div>
         </div>
-
+    </div>
+    
+    <div class="row align-items-center text-center">
+        <div class="col">
+            <button onclick="submitExam()" class="btn rounded-button" type="submit" style="border-bottom-width: 2px; width: 30%; height: 50px; border-radius: 24px; border-color: green">Guardar Examen</button>
+        </div>
     </div>
 </form>
 
