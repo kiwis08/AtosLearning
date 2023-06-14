@@ -13,7 +13,7 @@ public class ExamModel : PageModel
     
     private readonly IConfiguration _configuration;
     
-    public IList<Subject> Subjects { get; set; } = new List<Subject>();
+    public IEnumerable<Subject> Subjects { get; set; } = new List<Subject>();
     public User CurrentUser;
     [BindProperty]
     public string ExamTitle { get; set; }
@@ -25,18 +25,13 @@ public class ExamModel : PageModel
     
     [BindProperty]
     public int CurrentQuestionIndex { get; set; }
-    
-    public IList<Question> Questions;
 
     [BindProperty] public int QuestionsCount { get; set; } = 1;
 
 
-
-    public Subject? SelectedSubject { get; set; }
-    
     [BindProperty]
-    public int CorrectAnswerIndex { get; set; }
-    
+    public int SelectedSubjectId { get; set; }
+
     public ExamModel(IConfiguration configuration)
     {
         _configuration = configuration;
@@ -48,25 +43,10 @@ public class ExamModel : PageModel
         var userBytes = HttpContext.Session.Get("User");
         var user = userBytes == null ? null : JsonSerializer.Deserialize<User>(userBytes);
         CurrentUser = user;
+
+        Subjects = await GetSubjects();
         
-        
-        CurrentExam = new Exam();   
-
-        // Get the list of subjects from session state
-        var subjectBytes = HttpContext.Session.Get("Subjects"); 
-        var subjects = subjectBytes == null ? null : JsonSerializer.Deserialize<List<Subject>>(subjectBytes);
-
-        // If the list is null (i.e. this is the first time the page has been loaded),
-        // create a new list and add it to session state
-        if (subjects == null)
-        {
-            subjects = await GetSubjects();
-            var bytes = JsonSerializer.SerializeToUtf8Bytes(subjects);
-            HttpContext.Session.Set("Subjects", bytes);
-        }
-
-        // Set the list of subjects as a property on the model so it can be used in the view
-        Subjects = subjects;
+        CurrentExam = new Exam();
     }
 
 
@@ -78,15 +58,36 @@ public class ExamModel : PageModel
         var client = new HttpClient();
         var response = await client.GetAsync(url);
         var json = await response.Content.ReadAsStringAsync();
-        var subjects = JsonSerializer.Deserialize<List<Subject>>(json);
+        var subjects = JsonSerializer.Deserialize<List<Subject>>(json, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
         return subjects ?? new List<Subject>();
     }
     
     
     
-    public async Task UploadExam()
+    public async Task<bool> UploadExam()
     {
+        for (int i = 0; i < CurrentExam.Questions.Length; i++)
+        {
+            CurrentExam.Questions[i].Answers[CurrentExam.Questions[i].CorrectAnswerIndex].IsCorrect = true;
+        }
+        string connectionString = _configuration.GetConnectionString("atoslearning");
+        var url = connectionString + $"api/Exams/add";
         
+        var client = new HttpClient();
+        var jsonExam = JsonSerializer.Serialize(CurrentExam);
+        var content= new StringContent(jsonExam, Encoding.UTF8, "application/json");
+        var response = await client.PostAsync(url, content);
+        var json = await response.Content.ReadAsStringAsync();
+        var success = JsonSerializer.Deserialize<bool>(json, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+        return success;
+    }
+
+    public async Task<IActionResult> OnPost()
+    {
+
+        CurrentExam.SubjectId = SelectedSubjectId;
+        await UploadExam();
+        return RedirectToPage("Homepage");
     }
 
 }
