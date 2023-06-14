@@ -258,52 +258,53 @@
             </div>
         </div>
     </section>
-    <h4>Examenes anteriores</h4>
-    <section id="tranding">
-        <div class="container">
-            <div class="swiper tranding-slider overflow-visible">
-                <div class="swiper-wrapper">
-                    <!-- Slide-start -->
-                    @foreach (var Exam in Model.ClosedExams)
-                    {
-                        <div class="swiper-slide tranding-slide">
-                            <div class="tranding-slide-img">
-                                <img src="@Exam.ImageUrl" alt="Tranding">
-                            </div>
-                            <div class="tranding-slide-content">
-                                <div class="tranding-slide-content-bottom">
-                                    @if (@Model.CurrentUser.IsTeacher)
-                                    {
-                                        <a asp-page="/resultado" asp-route-examid=@Exam.Id><h2 class="food-name">@Exam.Title</h2></a>
-                                    }
-                                    else
-                                    {
-                                        <a asp-page="/resultadoAlumno" asp-route-examid=@Exam.Id><h2 class="food-name">@Exam.Title</h2></a>
-                                    }
+    <h4 class="mt-5">Examenes anteriores</h4>
+<section id="tranding" class="">
+    <div class="container">
+        <div class="swiper tranding-slider overflow-visible">
+            <div class="swiper-wrapper">
+                <!-- Slide-start -->
+                @foreach (var Exam in Model.ClosedExams)
+                {
+                    <div class="swiper-slide tranding-slide">
+                        <div class="tranding-slide-img">
+                            <img src="@Exam.ImageUrl" alt="Tranding">
+                        </div>
+                        <div class="tranding-slide-content">
+                            <div class="tranding-slide-content-bottom">
+                                @if (@Model.CurrentUser.IsTeacher)
+                                {
+                                    <a asp-page="/resultado" asp-route-examid=@Exam.Id><h2 class="food-name">@Exam.Title</h2></a>
+                                }
+                                else
+                                {
+                                    <a asp-page="/resultadoAlumno" asp-route-examid=@Exam.Id><h2 class="food-name">@Exam.Title</h2></a>
+                                }
 
-                                    <h4 class="food-rating">
-                                        <p> @Exam.DueDate </p>
-                                    </h4>
-                                </div>
+                                <h4 class="food-rating">
+                                    <p> @Exam.DueDate </p>
+                                </h4>
                             </div>
                         </div>
-                    }
-                    <!-- Slide-end -->
-                </div>
-
-                <div class="tranding-slider-control mt-5">
-                    <div class="swiper-button-prev slider-arrow">
-                        <ion-icon name="arrow-back-outline"></ion-icon>
                     </div>
-                    <div class="swiper-button-next slider-arrow">
-                        <ion-icon name="arrow-forward-outline"></ion-icon>
-                    </div>
-                    <div class="swiper-pagination"></div>
-                </div>
-
+                }
+                <!-- Slide-end -->
             </div>
+
+            <div class="tranding-slider-control mt-5">
+                <div class="swiper-button-prev slider-arrow">
+                    <ion-icon name="arrow-back-outline"></ion-icon>
+                </div>
+                <div class="swiper-button-next slider-arrow">
+                    <ion-icon name="arrow-forward-outline"></ion-icon>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+
         </div>
-    </section>
+    </div>
+</section>
+<div class="mt-5 mb-5"></div>
 
 </div>
    
