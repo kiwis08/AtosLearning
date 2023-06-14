@@ -2,15 +2,14 @@
 @model AtosLearning.Pages.CrearExamen
 
 @{
-    Layout = null;
 }
-
 <head>
-    <link href="css/exam.css" rel="stylesheet" />
-    <title>Examen</title>
-
+    <meta charset="utf-8" />
+    <title>Crear examen</title>
+    <link href="css/homepage.css" rel="stylesheet"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-
 <body>
 <header class="min-vw-100 display-flex flex-row justify-content-between align-items-center px-5">
     <div class="my-flex-row">
@@ -43,11 +42,11 @@
                                     y estas inscrito a un curso de manera exitosa.
                                     @if (@Model.CurrentUser.IsTeacher)
                                     {
-                                    <p> Tu perfil es de tipo maestro </p>
+                                        <p> Tu perfil es de tipo maestro </p>
                                     }
                                     else
                                     {
-                                    <p> Tu perfil es de tipo alumno </p>
+                                        <p> Tu perfil es de tipo alumno </p>
                                     }
                                 </p>
 
@@ -66,5 +65,54 @@
         </div>
     </div>
 </header>
+
+<main>
+    <h1 class="text-dark mt-4 text-center">Crear un examen</h1>
+    <div class="container w-50 p-4 rounded" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+        
+        <form>
+            <div class="row mb-4">
+                <div class="w-50">
+                      <label for="imagen-examen" class="form-label">Nombre del exámen</label>
+                    <input type="text" class="form-control" id="imagen-examen">
+                    </div>
+                <div class="w-25">
+                    <select asp-for="@Model.SelectedSubjectId" class="dropdown-toggle mt-4">
+                        <option value="">Selecciona una materia</option>
+                        <ul class="dropdown-menu">
+                            @for (int i = 0; i < @Model.Subjects.Count(); i++)
+                            {
+                                <option class="dropdown-item" value="@Model.Subjects.ElementAt(i).ID">@Model.Subjects.ElementAt(i).Name</option>
+                            }
+                        </ul>
+                    </select>
+                    
+                </div>
+            </div>
+        <div class="row">
+            <div class="col w-100">
+                <div class="form-floating mb-3">
+                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" style="height: 200px"></textarea>
+                    <label for="floatingTextarea">Descripción del exámen </label>
+                </div>
+            </div>
+        </div>
+        
+            <div class="row mb-4">
+                <div class="col w-50">
+                    <label for="fecha-examen" class="form-label">Fecha de entrega</label>
+                    <input type="date" class="form-control" id="fecha-examen">
+                </div>
+                <div class="col w-50">
+                    <label for="imagen-examen" class="form-label">Imágen del exámen</label>
+                    <input type="text" class="form-control" id="imagen-examen">
+                </div>
+            </div>
+            <div class="row" style="padding: 0px 25%">
+                <button type="submit" class="btn btn-primary">Continuar</button>
+            </div>
+        </form>
+    </div>
+</main>
 
 </body>
