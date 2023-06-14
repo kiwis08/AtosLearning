@@ -46,9 +46,7 @@
             </div>
             <div class="col">
                 <label for="start">Fecha límite:</label><br/>
-                <input type="date" id="start" name="trip-start"
-                       asp-for="@Model.CurrentExam.DueDate"
-                       min="2023-06-12" max="2023-12-31">
+                <input asp-for="@Model.CurrentExam.DueDate">
                 <input type="hidden" name="ExamTitle" id="hidden-exam-title" value="@Model.CurrentExam.Title"/>
                 <input type="hidden" name="ExamDescription" id="hidden-exam-description" value="@Model.CurrentExam.Description"/>
                 <select asp-for="@Model.SelectedSubjectId" class="dropdown-toggle btn-lg">
