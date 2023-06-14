@@ -1,15 +1,7 @@
 ﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 // for details on configuring this project to bundle and minify static web assets.
 
-// Write your JavaScript code.
-function onSelectDropdown() {
-    const examTitle = document.getElementById("exam-title");
-    const examDescription = document.getElementById("exam-description");
-    alert(examTitle.value)
-    document.getElementById("hidden-exam-title").value = examTitle.value;
-    document.getElementById("hidden-exam-description").value = examDescription.value;
-    document.getElementById("subject-form").submit();
-}
+// Write your JavaScript code. 
 
 function addQuestion() {
     const questionsList = document.getElementById('questions-list');

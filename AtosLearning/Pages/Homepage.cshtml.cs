@@ -17,15 +17,17 @@ namespace AtosLearning.Pages;
 
     private readonly IConfiguration _configuration;
 
+    [BindProperty]
     public IList<Subject> Subjects { get; set; } = new List<Subject>();
+    
     public IList<Exam> Exams { get; set; } = new List<Exam>();
     public IList<Exam> ActiveExams { get; set; } = new List<Exam>();
     public IList<Exam> ClosedExams { get; set; } = new List<Exam>();
     
     [BindProperty]
     public User CurrentUser { get; set; }
+    
     [BindProperty]
-
     public Subject? SelectedSubject { get; set; }
     
     [BindProperty]
@@ -41,7 +43,7 @@ namespace AtosLearning.Pages;
     }
 
 
-    public async Task OnGet()
+    public async Task OnGet(string subjectId = null)
     {
 
 
@@ -52,10 +54,15 @@ namespace AtosLearning.Pages;
         ActiveExams = await GetActiveExams();
         ClosedExams = await GetInactiveExams();
 
-        
-        
-
         Subjects = await GetSubjects();
+        HttpContext.Session.Set("Subjects", Encoding.UTF8.GetBytes(JsonSerializer.Serialize(Subjects)));
+        
+        if (subjectId != null)
+        {
+            SelectedSubject = Subjects.FirstOrDefault(s => s.ID == int.Parse(subjectId));
+            ActiveExams = ActiveExams.Where(e => e.SubjectId == int.Parse(subjectId)).ToList();
+            ClosedExams = ClosedExams.Where(e => e.SubjectId == int.Parse(subjectId)).ToList();
+        }
 
     }
 
@@ -116,12 +123,11 @@ namespace AtosLearning.Pages;
         return subjects ?? new List<Subject>();
     }
 
-    public void OnPostSetSelectedSubject(int subjectId)
+    public IActionResult OnPostSetSelectedSubject(string subjectId)
     {
-        LoadState();
-        SelectedSubject = Subjects.FirstOrDefault(s => s.ID == subjectId);
-        var bytes = JsonSerializer.SerializeToUtf8Bytes(SelectedSubject);
-        HttpContext.Session.Set("SelectedSubject", bytes);
+        var subjectsByte = HttpContext.Session.Get("Subjects");
+        var subjects = subjectsByte == null ? null : JsonSerializer.Deserialize<List<Subject>>(subjectsByte);
+        return Redirect("/Homepage?subjectId=" + subjectId);
     }
     private void LoadState()
     {
