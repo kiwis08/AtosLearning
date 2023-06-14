@@ -86,179 +86,169 @@
 
 
 <div class="principal">
-    <div class="row ">
+<div class="row ">
 
-            <div class="col-3 text-center align-content-start">
-                @if (@Model.CurrentUser.IsTeacher)
-                {
-                    <button class="button-rectangle" onclick="location.href='/CrearExamen'">Crear examen</button>
-                }
-                else
-                {
-                    <img id="SpriteIdle" src="~/images/spriteIdle.png" alt="idlesprite"/>
-                }
-            </div>
+    <div class="col-3 text-center align-content-start">
+        @if (@Model.CurrentUser.IsTeacher)
+        {
+            <button class="button-rectangle" onclick="location.href='/CrearExamen'">Crear examen</button>
+        }
+        else
+        {
+            <img id="SpriteIdle" src="~/images/spriteIdle.png" alt="idlesprite"/>
+        }
+    </div>
         
-        <div class="col-5 align-items-start">
-                 <div class="columnabuscar">
-                       <div class="row">
-                            <h4>Buscar examen</h4><br />
-                       </div>
-                        <div class="row">
-                            <input type="text" class="search-bar" placeholder="Buscar examen">
+    <div class="col-5 align-items-start">
+        <div class="columnabuscar">
+            <div class="row">
+                <h4>Buscar examen</h4><br />
+            </div>
+            <div class="row">
+                <input type="text" class="search-bar" placeholder="Buscar examen">
+            </div>
+            <div class="row">
+                <button class="buscar" onclick="performSearch()">Buscar</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-4" style="display: grid;padding: 20px 50px 20px 20px;align-content: center;justify-items: center;">
+        <div class="row align-items-center" style="display:flex;">
+            <h4>Materias</h4>
+        </div>
+
+        <div class="col align-items-start" style="display:flex;flex-wrap: wrap;justify-content: center;">
+            @foreach (var subject in @Model.Subjects)
+            {
+                <!-- Button trigger modal -->
+                <button type="button" class="btn nombremateria" data-bs-toggle="modal" data-bs-target=@("#" + subject.Name.Substring(0,4))>@subject.Name</button>
+                <!-- Modal -->
+                <div class="modal fade" id=@subject.Name.Substring(0,4) tabindex="-1" aria-labelledby=@subject.ID.ToString() aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id=@subject.ID.ToString()>@subject.Name</h5>
+                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                @subject.Description
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
                         </div>
-                        <div class="row">
-                            <button class="buscar" onclick="performSearch()">Buscar</button>
-                        </div>
+                    </div>
                 </div>
+
+            }
         </div>
-        <div class="col-4" style="display: grid;padding: 20px 50px 20px 20px;align-content: center;justify-items: center;">
-            <div class="row align-items-center" style="display:flex;">
-                <h4>Materias</h4>
-            </div>
 
-            <div class="col align-items-start" style="display:flex;flex-wrap: wrap;justify-content: center;">
-                    @foreach (var subject in Model.Subjects)
-                    {
-
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn nombremateria" data-bs-toggle="modal" data-bs-target=@("#" + subject.Name.Substring(0,4))>@subject.Name</button>
-                    <!-- Modal -->
-                    <div class="modal fade" id=@subject.Name.Substring(0,4) tabindex="-1" aria-labelledby=@subject.ID.ToString() aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id=@subject.ID.ToString()>@subject.Name</h5>
-                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    @subject.Description
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                </div>
+        <div class="row align-items-center" style="display:flex; justify-content:center;">
+            @if (@Model.CurrentUser.IsTeacher)
+            {
+                <button type="button" class="btn crearmateria" data-bs-toggle="modal" data-bs-target="#ModalCrear">Crear materia</button>
+                <!-- Modal -->
+                <div class="modal fade" id="ModalCrear" tabindex="-1" aria-labelledby="ModaCrearlLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header display-flex justify-content-center">
+                                <h5 class="modal-title text-center d-block" id="ModalCrearLabel">Crear materia</h5>
                             </div>
-                        </div>
-                    </div>
-
-                    
-                    }
-            </div>
-
-            <div class="row align-items-center" style="display:flex; justify-content:center;">
-                @if (@Model.CurrentUser.IsTeacher)
-                {
-                    <button type="button" class="btn crearmateria" data-bs-toggle="modal" data-bs-target="#ModalCrear">Crear materia</button>
-                    <!-- Modal -->
-                    <div class="modal fade" id="ModalCrear" tabindex="-1" aria-labelledby="ModaCrearlLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header display-flex justify-content-center">
-                                    <h5 class="modal-title text-center d-block" id="ModalCrearLabel">Crear materia</h5>
-                                </div>
-                                <div class="modal-body">
-                                    <form method="post" asp-page-handler="CreateSubject">
-                                        <div class="mb-3">
-                                            <label for="nombreMateria" class="form-label">Nombre de la materia</label>
-                                            <input type="text" asp-for="NewSubjectName" class="form-control" id="nombreMateria" placeholder="Nombre">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="descripcionMateria" class="form-label">Descripción</label>
-                                            <textarea type="textarea" asp-for="NewSubjectDescription" class="form-control" id="descripcionMateria" style="height: 120px" placeholder="Descripción"> </textarea>
-                                        </div>
-                                        <div class="display-flex justify-content-end">
-                                            <div class="" style="padding-left: 65%">
-                                                <button type="submit" class="btn btn-success">Submit</button>
-                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                            <div class="modal-body">
+                                <form method="post" asp-page-handler="CreateSubject">
+                                    <div class="mb-3">
+                                        <label for="nombreMateria" class="form-label">Nombre de la materia</label>
+                                        <input type="text" asp-for="NewSubjectName" class="form-control" id="nombreMateria" placeholder="Nombre">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="descripcionMateria" class="form-label">Descripción</label>
+                                        <textarea type="textarea" asp-for="NewSubjectDescription" class="form-control" id="descripcionMateria" style="height: 120px" placeholder="Descripción"> </textarea>
+                                    </div>
+                                    <div class="display-flex justify-content-end">
+                                        <div class="" style="padding-left: 65%">
+                                            <button type="submit" class="btn btn-success">Submit</button>
+                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                                                 
-                                            </div>
                                         </div>
-                                    </form>
-                                </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
-                }
-            </div>
+                </div>
+            }
         </div>
-        </div>
+    </div>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
 
-    <!----------------------------------------------------->
+<!----------------------------------------------------->
    
 <div class="row justify-content-between">
     <div class="col-4 text-start align-items-start">
 
         <h4>Examenes pendientes</h4>
     </div>
-        <div class="col-3 text-center align-content-end">
-            <button class="btn btn-secondary btn-lg dropdown-toggle" id="subject-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                @if (Model.SelectedSubject != null)
+    <div class="col-3 text-center align-content-end">
+        <form method="post" asp-page-handler="SetSelectedSubject" id="subject-form">
+            <!-- Select to pass subject id to handler -->
+            <select asp-for="@Model.SelectedSubject" onchange="this.form.submit()" name="subjectId">
+                <option value="">Todas las materias</option>
+                @foreach (var subject in @Model.Subjects)
                 {
-                    @Model.SelectedSubject.Name
+                    <option value=@subject.ID>@subject.Name</option>
                 }
-                else
-                {
-                    <span>Filtrar</span>
-                }
-            </button>
-            <ul class="dropdown-menu">
-                @foreach (var subject in Model.Subjects)
-                {
-                    <li>
-                        <button class="dropdown-item" onclick="onSelectDropdown()" name="subjectId" value="@subject.ID">@subject.Name</button>
-                    </li>
-                }
-            </ul>
-        </div>
+            </select>
+        </form>
+    </div>
 </div>
-    <section id="tranding">
-        <div class="container">
-            <div class="swiper tranding-slider overflow-visible">
-                <div class="swiper-wrapper">
-                    <!-- Slide-start -->
-                    @foreach (var Exam in Model.ActiveExams)
-                    {
-                        <div class="swiper-slide tranding-slide">
-                            <div class="tranding-slide-img">
-                                <img src="@Exam.ImageUrl" alt="Tranding">
-                            </div>
-                            <div class="tranding-slide-content">
-                                <div class="tranding-slide-content-bottom" style="align-content:center;">
-                                    @if (@Model.CurrentUser.IsTeacher)
-                                    {
-                                        <a asp-page="/resultado" asp-route-examid=@Exam.Id><h2 class="food-name">@Exam.Title</h2></a>
-                                    }
-                                    else
-                                    {
-                                        <a asp-page="/resultadoAlumno" asp-route-examid=@Exam.Id><h2 class="food-name">@Exam.Title</h2></a>
-                                    }
-                                    <h4 class="food-rating">
-                                        <p> @Exam.DueDate </p>
-                                    </h4>
-                                </div>
+<section id="tranding">
+    <div class="container">
+        <div class="swiper tranding-slider overflow-visible">
+            <div class="swiper-wrapper">
+                <!-- Slide-start -->
+                @foreach (var Exam in Model.ActiveExams)
+                {
+                    <div class="swiper-slide tranding-slide">
+                        <div class="tranding-slide-img">
+                            <img src="@Exam.ImageUrl" alt="Tranding">
+                        </div>
+                        <div class="tranding-slide-content">
+                            <div class="tranding-slide-content-bottom" style="align-content:center;">
+                                @if (@Model.CurrentUser.IsTeacher)
+                                {
+                                    <a asp-page="/resultado" asp-route-examid=@Exam.Id><h2 class="food-name">@Exam.Title</h2></a>
+                                }
+                                else
+                                {
+                                    <a asp-page="/resultadoAlumno" asp-route-examid=@Exam.Id><h2 class="food-name">@Exam.Title</h2></a>
+                                }
+                                <h4 class="food-rating">
+                                    <p> @Exam.DueDate </p>
+                                </h4>
                             </div>
                         </div>
-                    }
-                </div>
-
-                <div class="tranding-slider-control mt-5">
-                    <div class="swiper-button-prev slider-arrow">
-                        <ion-icon name="arrow-back-outline"></ion-icon>
                     </div>
-                    <div class="swiper-button-next slider-arrow">
-                        <ion-icon name="arrow-forward-outline"></ion-icon>
-                    </div>
-                    <div class="swiper-pagination"></div>
-                </div>
-
+                }
             </div>
+
+            <div class="tranding-slider-control mt-5">
+                <div class="swiper-button-prev slider-arrow">
+                    <ion-icon name="arrow-back-outline"></ion-icon>
+                </div>
+                <div class="swiper-button-next slider-arrow">
+                    <ion-icon name="arrow-forward-outline"></ion-icon>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+
         </div>
-    </section>
-    <h4 class="mt-5">Examenes anteriores</h4>
+    </div>
+</section>
+<h4 class="mt-5">Examenes anteriores</h4>
 <section id="tranding" class="">
     <div class="container">
         <div class="swiper tranding-slider overflow-visible">
@@ -307,8 +297,7 @@
 <div class="mt-5 mb-5"></div>
 
 </div>
-   
-    <script src="lib/bootstrap/dist/js/bootstrap.js">
+<script src="lib/bootstrap/dist/js/bootstrap.js">
     </script>
 
 
