@@ -26,7 +26,39 @@
     <div class="my-flex-row">
         <div class="my-flex-column align-items-center me-2">
             <h4>@Model.CurrentUser.Name @Model.CurrentUser.Surname</h4>
-            <h5>Ver mi perfil</h5>
+            <h5 data-bs-toggle="modal" data-bs-target="#ModalPerfil" style="cursor:pointer;">Ver mi perfil</h5>
+            <div class="modal fade" id="ModalPerfil" tabindex="-1" aria-labelledby="ModaPerfilLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header display-flex justify-content-center">
+                            <h5 class="modal-title text-center d-block" id="ModalPerfilLabel">¡ Hola  @Model.CurrentUser.Name !</h5>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <p>
+                                    Los datos de tu perfil son los siguientes:
+                                    Tu nombre es @Model.CurrentUser.Name @Model.CurrentUser.Surname,
+                                    tu correo es @Model.CurrentUser.Email
+                                    y estas inscrito a un curso de manera exitosa.
+                                    @if (@Model.CurrentUser.IsTeacher)
+                                    {
+                                    <p> Tu perfil es de tipo maestro </p>
+                                    }
+                                    else
+                                    {
+                                    <p> Tu perfil es de tipo alumno </p>
+                                    }
+                                </p>
+
+                            </div>
+                            <div class="display-flex justify-content-end">
+                                <button type="button" onclick="location.href='Index'" class="btn btn-danger">Cerrar sesión</button>
+                                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Regresar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="my-flex-column align-items-center justify-content-center">
             <img id="user-img" src="images/profile.png" alt="profile" />

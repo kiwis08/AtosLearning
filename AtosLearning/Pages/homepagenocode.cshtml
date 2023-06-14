@@ -36,7 +36,7 @@
     <div class="my-flex-row">
         <div class="my-flex-column align-items-center me-2">
             <h4>@Model.CurrentUser.Name @Model.CurrentUser.Surname</h4>
-            <h5 data-bs-toggle="modal" data-bs-target="#ModalPerfil">Ver mi perfil</h5>
+            <h5 data-bs-toggle="modal" data-bs-target="#ModalPerfil" style="cursor:pointer;">Ver mi perfil</h5>
             <div class="modal fade" id="ModalPerfil" tabindex="-1" aria-labelledby="ModaPerfilLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
@@ -83,7 +83,7 @@
         <img id="SpriteIdle" src="~/images/spriteHurt.png" alt="idlesprite" />
     </div>
     <div class="row align-content-center">
-        <h1>No estas inscrito a ningún curso</h1>
+        <h1 style="color:black!important">No estas inscrito a ningún curso</h1>
     </div>
     <div class="row align-content-center">
         <form>
