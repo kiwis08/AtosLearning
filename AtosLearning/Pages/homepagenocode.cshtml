@@ -86,9 +86,9 @@
         <h1 style="color:black!important">No estas inscrito a ningún curso</h1>
     </div>
     <div class="row align-content-center">
-        <form>
-            <input type="text" placeholder="Código del curso." /><br />
-            <button class="buscar" onclick="performSearch()">Ingresar</button>
+        <form method="post">
+            <input type="text" placeholder="Código del curso" asp-for="CourseCode"/><br />
+            <button class="buscar" type="submit">Ingresar</button>
         </form>
 
     </div>
