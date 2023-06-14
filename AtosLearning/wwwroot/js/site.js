@@ -20,10 +20,6 @@ function addQuestion() {
     questionsList.appendChild(newQuestionLi);
 }
 
-function submitExam() {
-    document.getElementById('exam-form').submit();
-}
-
 $('#recipeCarousel').carousel({
     interval: 10000
 })

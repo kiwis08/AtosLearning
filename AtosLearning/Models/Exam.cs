@@ -23,6 +23,6 @@ public class Exam
     public string ImageUrl { get; set; } = "https://via.placeholder.com/150";
     
     [JsonPropertyName("questions")]
-    public Question[] Questions { get; set; }
+    public List<Question> Questions { get; set; }
     
 }

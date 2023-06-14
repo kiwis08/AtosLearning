@@ -55,34 +55,12 @@ namespace AtosLearning.Pages
             return subjects ?? new List<Subject>();
         }
 
-
-
-        public async Task<bool> UploadExam()
+        public IActionResult OnPost()
         {
-            for (int i = 0; i < CurrentExam.Questions.Length; i++)
-            {
-                CurrentExam.Questions[i].Answers[CurrentExam.Questions[i].CorrectAnswerIndex].IsCorrect = true;
-            }
-
-            string connectionString = _configuration.GetConnectionString("atoslearning");
-            var url = connectionString + $"api/Exams/add";
-
-            var client = new HttpClient();
-            var jsonExam = JsonSerializer.Serialize(CurrentExam);
-            var content = new StringContent(jsonExam, Encoding.UTF8, "application/json");
-            var response = await client.PostAsync(url, content);
-            var json = await response.Content.ReadAsStringAsync();
-            var success = JsonSerializer.Deserialize<bool>(json,
-                new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
-            return success;
-        }
-
-        public async Task<IActionResult> OnPost()
-        {
-
             CurrentExam.SubjectId = SelectedSubjectId;
-            await UploadExam();
-            return RedirectToPage("Homepage");
+            TempData["NewExam"] = JsonSerializer.Serialize(CurrentExam);
+            TempData["CurrentQuestionIndex"] = 0;
+            return RedirectToPage("/Exam");
         }
     }
 }
