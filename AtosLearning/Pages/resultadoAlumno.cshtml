@@ -57,16 +57,27 @@
             <span class="fs-6 text-primary fw-bold d-block m-0">Descripción del examen:</span>
             <span class="fs-7 text-dark d-block m-0">@Model.CurrentExam.Description</span>
         </div>
-        <div class="col container display-flex flex-row justify-content-center py-3 ms-2" style="box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);">
-            <div class="row">
-                <span class="fs-4 text-primary fw-bold d-block m-0 text-center">Resultado</span>
-                <span class="fs-4 text-dark d-block m-0 text-center">@Model.CurrentExamSubmission.Score.ToString()</span>
+        @if (@Model.CurrentExamSubmission != null)
+        {
+            <div class="col container display-flex flex-row justify-content-center py-3 ms-2" style="box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);">
+                <div class="row">
+                    <span class="fs-4 text-primary fw-bold d-block m-0 text-center">Resultado</span>
+                    <span class="fs-4 text-dark d-block m-0 text-center">@Model.CurrentExamSubmission.Score.ToString()</span>
+                </div>
+                <div class="row">
+                    <span class="fs-6 text-primary fw-bold d-block m-0 text-center">Fecha de entrega</span>
+                    <span class="fs-7 text-dark d-block m-0 text-center">@Model.CurrentExamSubmission.Date.ToString("f")</span>
+                </div>
             </div>
-            <div class="row">
-                <span class="fs-6 text-primary fw-bold d-block m-0 text-center">Fecha de entrega</span>
-                <span class="fs-7 text-dark d-block m-0 text-center">@Model.CurrentExamSubmission.Date.ToString("f")</span>
+        }
+        else
+        {
+            <div class="col container display-flex flex-row justify-content-center py-3 ms-2" style="box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);">
+                <div class="row">
+                    <span class="fs-4 text-primary fw-bold d-block m-0 text-center">Sin entrega</span>
+                </div>
             </div>
-        </div>
+        }
     </div>
 </div>
 

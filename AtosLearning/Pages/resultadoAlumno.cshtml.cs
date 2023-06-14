@@ -17,7 +17,7 @@ namespace AtosLearning.Pages
         public string ExamId { get; set; }
 
         public Exam CurrentExam { get; set; }
-        public ExamSubmission CurrentExamSubmission { get; set; }
+        public ExamSubmission? CurrentExamSubmission { get; set; }
         
         public User CurrentUser { get; set; }
         public List<AnswerSubmission> AnswersData { get; set; }
@@ -33,7 +33,7 @@ namespace AtosLearning.Pages
             CurrentExamSubmission = await GetExamSubmission();
         }
 
-        public async Task<ExamSubmission> GetExamSubmission()
+        public async Task<ExamSubmission?> GetExamSubmission()
         {
             string connectionString = _configuration.GetConnectionString("atoslearning");
             var url = connectionString + $"api/Stats/submission/{CurrentUser.Id}/{ExamId}";
@@ -41,7 +41,7 @@ namespace AtosLearning.Pages
             var client = new HttpClient();
             var response = await client.GetAsync(url);
             var json = await response.Content.ReadAsStringAsync();
-            var examSub = new ExamSubmission();
+            ExamSubmission? examSub = null;
             if (json != null && json != "null" && json != "")
             {
                 examSub = JsonSerializer.Deserialize<ExamSubmission>(json, new JsonSerializerOptions()
@@ -49,7 +49,7 @@ namespace AtosLearning.Pages
                     PropertyNameCaseInsensitive = true
                 });
             }
-            return examSub ?? new ExamSubmission();
+            return examSub;
 
         }
         public async Task<List<AnswerSubmission>> GetAnswers()
