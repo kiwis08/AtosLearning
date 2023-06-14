@@ -59,15 +59,15 @@ namespace AtosLearning.Pages
             HttpContext.Session.Set("User", JsonSerializer.SerializeToUtf8Bytes(user));
             
             // Redirect to the Homepage
+            if (user.Course == null)
+            {
+                return RedirectToPage("/homepagenocode");
+            }
             if (user.IsTeacher)
             {
                 return RedirectToPage("/Homepage");
             }
-            else
-            {
-                return RedirectToPage("/Homepage");
-            }
-            
+
             // Default redirect to the IniciarSesion page
             return RedirectToPage("/IniciarSesion");
         }
