@@ -16,7 +16,6 @@ a:link {
 
 
 
-
 @media (min-width: 768px) {
     html {
         font-size: 16px;
@@ -140,6 +139,12 @@ body {
     align-items: center;
 }
 
+#SpriteIdle {
+    width: 320px;
+    height: 290px;
+}
+
+
 #right-side-img {
     margin-top:2rem;
     margin-left: 1rem;
@@ -150,10 +155,7 @@ body {
     width:4rem;
 }
 
-#SpriteIdle {
-    height: 20rem;
-    width: 20rem;
-}
+
 
 
 .blue {
