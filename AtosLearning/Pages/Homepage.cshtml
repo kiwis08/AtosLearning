@@ -129,9 +129,6 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id=@subject.ID.ToString()>@subject.Name</h5>
-                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
                                 </div>
                                 <div class="modal-body">
                                     @subject.Description
@@ -170,8 +167,8 @@
                                         </div>
                                         <div class="display-flex justify-content-end">
                                             <div class="" style="padding-left: 65%">
-                                                <button type="submit" class="btn btn-success">Submit</button>
-                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-success">Crear</button>
+                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
                                                 
                                             </div>
                                         </div>
@@ -192,7 +189,7 @@
 <div class="row justify-content-between">
     <div class="col-4 text-start align-items-start">
 
-        <h4>Examenes pendientes</h4>
+        <h4>Exámenes con fecha futura</h4>
     </div>
         <div class="col-3 text-center align-content-end">
             <button class="btn btn-secondary btn-lg dropdown-toggle" id="subject-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -258,7 +255,7 @@
             </div>
         </div>
     </section>
-    <h4>Examenes anteriores</h4>
+    <h4>Exámenes con fecha pasada</h4>
     <section id="tranding">
         <div class="container">
             <div class="swiper tranding-slider overflow-visible">
