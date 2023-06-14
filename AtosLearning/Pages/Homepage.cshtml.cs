@@ -108,7 +108,11 @@ namespace AtosLearning.Pages;
         var client = new HttpClient();
         var response = await client.GetAsync(url);
         var json = await response.Content.ReadAsStringAsync();
-        var subjects = JsonSerializer.Deserialize<List<Subject>>(json, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+        var subjects = new List<Subject>();
+        if (json != null && json != "")
+        {
+            subjects = JsonSerializer.Deserialize<List<Subject>>(json, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+        }
         return subjects ?? new List<Subject>();
     }
 

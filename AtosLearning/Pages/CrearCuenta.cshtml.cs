@@ -41,16 +41,11 @@ namespace AtosLearning.Pages
             
             var formData = new List<KeyValuePair<string, string>>
             {
-                new KeyValuePair<string, string>("Name", Nombre),
-                new KeyValuePair<string, string>("Surname", Apellido),
-                new KeyValuePair<string, string>("Email", Correo),
-                new KeyValuePair<string, string>("Password", Contraseña),
-                new KeyValuePair<string, string>("IsTeacher", Role == "Profesor" ? "true" : "false"),
-                new KeyValuePair<string, string>("CharacterId", "0"),
-                new KeyValuePair<string, string>("TotalScore", "0"),
-                new KeyValuePair<string, string>("Nickname", Nombre),
-                new KeyValuePair<string, string>("Image", "https://i.imgur.com/3Z4nB9K.png"),
-                new KeyValuePair<string, string>("Id", "0"),
+                new KeyValuePair<string, string>("name", Nombre),
+                new KeyValuePair<string, string>("surname", Apellido),
+                new KeyValuePair<string, string>("email", Correo),
+                new KeyValuePair<string, string>("password", Contraseña),
+                new KeyValuePair<string, string>("isTeacher", Role == "Profesor" ? "true" : "false"),
             };
             
             request.Content = new FormUrlEncodedContent(formData);
