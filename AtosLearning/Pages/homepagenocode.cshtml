@@ -21,7 +21,7 @@
             <h4 class="yellow d-inline-block fs-">Home page</h4>
         </div>
         <div class="my-flex-column justify-content-center mb-1">
-            <h5 class="blue">Profesores</h5>
+            <h5 class="blue">Alumnos</h5>
         </div>
     </div>
     @if (@Model.CurrentUser.IsTeacher)
@@ -49,7 +49,7 @@
                                     Los datos de tu perfil son los siguientes:
                                     Tu nombre es @Model.CurrentUser.Name @Model.CurrentUser.Surname,
                                     tu correo es @Model.CurrentUser.Email
-                                    y estas inscrito al curso @Model.CurrentUser.Course
+                                    y estas inscrito a un curso de manera exitosa.
                                     @if (@Model.CurrentUser.IsTeacher)
                                     {
                                     <p> Tu perfil es de tipo maestro </p>
@@ -78,11 +78,18 @@
     </div>
 </header>
 
-<div class="col-12 align-content-center">
-    <div class="row">
+<div class="col-12 align-content-center" style="display:flex; align-items:center; flex-direction:column">
+    <div class="row align-content-center">
         <img id="SpriteIdle" src="~/images/spriteHurt.png" alt="idlesprite" />
     </div>
-    <div class="row">
-        <h1>No estas inscrito a ningun curso</h1>
+    <div class="row align-content-center">
+        <h1>No estas inscrito a ningún curso</h1>
+    </div>
+    <div class="row align-content-center">
+        <form>
+            <input type="text" placeholder="Código del curso." /><br />
+            <button class="buscar" onclick="performSearch()">Ingresar</button>
+        </form>
+
     </div>
 </div>
