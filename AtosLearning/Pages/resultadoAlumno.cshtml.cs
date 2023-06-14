@@ -14,7 +14,7 @@ namespace AtosLearning.Pages
             _configuration = configuration;
         }
         
-        public string ExamId { get; set; } = "10";
+        public string ExamId { get; set; }
 
         public Exam CurrentExam { get; set; }
         public ExamSubmission CurrentExamSubmission { get; set; }
@@ -22,8 +22,9 @@ namespace AtosLearning.Pages
         public User CurrentUser { get; set; }
         public List<AnswerSubmission> AnswersData { get; set; }
 
-        public async Task OnGet()
+        public async Task OnGet(string examId)
         {
+            ExamId = examId;
             var userBytes = HttpContext.Session.Get("User");
             var user = userBytes == null ? null : JsonSerializer.Deserialize<User>(userBytes);
             CurrentUser = user;
@@ -35,15 +36,19 @@ namespace AtosLearning.Pages
         public async Task<ExamSubmission> GetExamSubmission()
         {
             string connectionString = _configuration.GetConnectionString("atoslearning");
-            var url = connectionString + $"/api/Stats/submission/{CurrentUser.Id}/{ExamId}";
+            var url = connectionString + $"api/Stats/submission/{CurrentUser.Id}/{ExamId}";
 
             var client = new HttpClient();
             var response = await client.GetAsync(url);
             var json = await response.Content.ReadAsStringAsync();
-            var examSub = JsonSerializer.Deserialize<ExamSubmission>(json, new JsonSerializerOptions()
+            var examSub = new ExamSubmission();
+            if (json != null && json != "null" && json != "")
             {
-                PropertyNameCaseInsensitive = true
-            });
+                examSub = JsonSerializer.Deserialize<ExamSubmission>(json, new JsonSerializerOptions()
+                {
+                    PropertyNameCaseInsensitive = true
+                });
+            }
             return examSub ?? new ExamSubmission();
 
         }
