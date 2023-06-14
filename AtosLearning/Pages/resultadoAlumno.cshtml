@@ -1,4 +1,5 @@
 ﻿@page
+@using System.Globalization
 @model AtosLearning.Pages.resultadoAlumno
 
 
@@ -53,7 +54,7 @@
     <div class="row mb-4">
         <div class="col container display-flex flex-row justify-content-center py-3 me-2" style="box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);">
             <span class="fs-6 text-primary fw-bold d-block m-0">Fecha límite:</span>
-            <span class="fs-7 text-dark d-block m-0">@Model.CurrentExam.DueDate.ToString("f")</span>
+            <span class="fs-7 text-dark d-block m-0">@Model.CurrentExam.DueDate.ToString("f", new CultureInfo("es-MX"))</span>
             <span class="fs-6 text-primary fw-bold d-block m-0">Descripción del examen:</span>
             <span class="fs-7 text-dark d-block m-0">@Model.CurrentExam.Description</span>
         </div>
@@ -66,7 +67,7 @@
                 </div>
                 <div class="row">
                     <span class="fs-6 text-primary fw-bold d-block m-0 text-center">Fecha de entrega</span>
-                    <span class="fs-7 text-dark d-block m-0 text-center">@Model.CurrentExamSubmission.Date.ToString("f")</span>
+                    <span class="fs-7 text-dark d-block m-0 text-center">@Model.CurrentExamSubmission.Date.ToString("f", new CultureInfo("es-MX"))</span>
                 </div>
             </div>
         }
