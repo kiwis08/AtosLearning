@@ -1,1 +1,118 @@
-﻿
+﻿@page
+@model AtosLearning.Pages.CrearExamen
+
+@{
+}
+<head>
+    <meta charset="utf-8" />
+    <title>Crear examen</title>
+    <link href="css/homepage.css" rel="stylesheet" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <header class="min-vw-100 display-flex flex-row justify-content-between align-items-center px-5">
+        <div class="my-flex-row">
+            <div class="my-flex-column me-1">
+                <h2 class="m-0 blue d-inline-block fs-1" onclick="location.href='/Homepage'" style="cursor:pointer;">AtosLearning</h2>
+                <h4 class="yellow d-inline-block fs-">Crear examen</h4>
+            </div>
+            <div class="my-flex-column justify-content-center mb-1">
+                <h5 class="blue">Profesores</h5>
+            </div>
+
+        </div>
+
+        <div class="my-flex-row">
+            <div class="my-flex-column align-items-center me-2">
+                <h4>@Model.CurrentUser.Name @Model.CurrentUser.Surname</h4>
+                <h5 data-bs-toggle="modal" data-bs-target="#ModalPerfil" style="cursor:pointer;">Ver mi perfil</h5>
+                <div class="modal fade" id="ModalPerfil" tabindex="-1" aria-labelledby="ModaPerfilLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header display-flex justify-content-center">
+                                <h5 class="modal-title text-center d-block" id="ModalPerfilLabel">¡ Hola  @Model.CurrentUser.Name !</h5>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <p>
+                                        Los datos de tu perfil son los siguientes:
+                                        Tu nombre es @Model.CurrentUser.Name @Model.CurrentUser.Surname,
+                                        tu correo es @Model.CurrentUser.Email
+                                        y estas inscrito a un curso de manera exitosa.
+                                        @if (@Model.CurrentUser.IsTeacher)
+                                        {
+                                        <p> Tu perfil es de tipo maestro </p>
+                                        }
+                                        else
+                                        {
+                                        <p> Tu perfil es de tipo alumno </p>
+                                        }
+                                    </p>
+
+                                </div>
+                                <div class="display-flex justify-content-end">
+                                    <button type="button" onclick="location.href='Index'" class="btn btn-danger">Cerrar sesión</button>
+                                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">Regresar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="my-flex-column align-items-center justify-content-center">
+                <img id="user-img" src="images/profile.png" alt="profile" />
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <h1 class="text-dark mt-4 text-center">Crear un examen</h1>
+        <div class="container w-50 p-4 rounded" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+
+            <form method="post">
+                <div class="row mb-4">
+                    <div class="w-50">
+                        <label for="imagen-examen" class="form-label">Nombre del examen</label>
+                        <input asp-for="@Model.CurrentExam.Title" type="text" class="form-control" id="imagen-examen">
+                    </div>
+                    <div class="w-25">
+                        <select asp-for="@Model.SelectedSubjectId" class="dropdown-toggle mt-4">
+                            <option value="">Selecciona una materia</option>
+                            <ul class="dropdown-menu">
+                                @for (int i = 0; i < @Model.Subjects.Count(); i++)
+                                {
+                                <option class="dropdown-item" value="@Model.Subjects.ElementAt(i).ID">@Model.Subjects.ElementAt(i).Name</option>
+                                }
+                            </ul>
+                        </select>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col w-100">
+                        <div class="form-floating mb-3">
+                            <textarea asp-for="@Model.CurrentExam.Description" class="form-control" placeholder="Leave a comment here" id="floatingTextarea" style="height: 200px"></textarea>
+                            <label for="floatingTextarea">Descripción del examen </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col w-50">
+                        <label for="fecha-examen" class="form-label">Fecha de entrega</label>
+                        <input asp-for="@Model.CurrentExam.DueDate" class="form-control" id="fecha-examen">
+                    </div>
+                    <div class="col w-50">
+                        <label for="imagen-examen" class="form-label">Imagen del examen</label>
+                        <input asp-for="@Model.CurrentExam.ImageUrl" type="text" class="form-control" id="imagen-examen">
+                    </div>
+                </div>
+                <div class="row" style="padding: 0px 25%">
+                    <button type="submit" class="btn btn-primary">Continuar</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+</body>
